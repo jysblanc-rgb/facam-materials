@@ -4,110 +4,217 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>내 업무 자동화 우선순위 TOP3 표</title>
+<title>업무 우선순위 TOP3 표</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<style>
-:root{--brown:#231815;--orange:#E87200;--orange-hover:#C55F00;--orange-tint:#FBE4CE;--cream:#F5F0EA;--white:#fff;
---g50:#FAF8F5;--g200:#EBE3D8;--g300:#DCD1C1;--g500:#A6947C;--g700:#6E5D48;--r-card:16px;--r-pill:999px}
-*{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--g700);font:400 17px/1.6 "Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;-webkit-text-size-adjust:100%;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{color:var(--brown);letter-spacing:-.02em;margin:0}
-.wrap{max-width:820px;margin:0 auto;padding:24px 16px 56px;display:grid;gap:16px}
-h1{font-weight:700;font-size:clamp(26px,6vw,34px);line-height:1.3}
-h2{font-weight:700;font-size:22px;line-height:1.4;margin-bottom:6px}
-h3{font-weight:700;font-size:19px;margin:16px 0 4px}
-h4{font-weight:600;font-size:16px;margin:14px 0 2px}
-.code{display:inline-block;background:var(--orange-tint);color:var(--orange-hover);font-weight:700;border-radius:var(--r-pill);padding:2px 12px;font-size:15px;margin-bottom:8px}
-.wrap>*{min-width:0}
-.card{background:var(--white);border:1px solid var(--g200);border-radius:var(--r-card);padding:20px 16px}
-.muted{color:var(--g700);margin:4px 0 0}
-a{color:var(--orange);text-decoration:none;font-weight:600}
-.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:var(--r-pill);background:var(--orange);color:#fff;font-weight:700}
-.btn:hover{background:var(--orange-hover);color:#fff}
-.btn.alt{background:var(--white);color:var(--brown);border:1.5px solid var(--brown)}
-.btn.alt:hover{background:var(--g50);color:var(--brown)}
-.steps{margin:8px 0 0;padding-left:22px}
-.steps li{margin:2px 0}
-dl{margin:8px 0 0}
-dt{font-weight:700;color:var(--brown);margin-top:10px}
-dd{margin:2px 0 0}
-.scroll{overflow-x:auto;margin-top:8px;border:1px solid var(--g200);border-radius:12px;-webkit-overflow-scrolling:touch}
-table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
-table.top{min-width:760px}
-th{background:var(--brown);color:#fff;font-weight:600;text-align:left;padding:8px 10px;vertical-align:middle}
-td{border-top:1px solid var(--g200);padding:9px 10px;color:var(--brown);vertical-align:top;height:40px}
-td.mk{background:var(--orange-tint)}
-tr.star td:last-child{color:var(--orange);font-weight:800}
-.note{background:var(--g50);border-left:3px solid var(--orange);border-radius:8px;padding:10px 12px;margin:10px 0 0;color:var(--brown)}
-details{margin-top:14px;border-top:1px solid var(--g200);padding-top:10px}
-summary{cursor:pointer;font-weight:700;color:var(--brown);min-height:44px;display:flex;align-items:center}
-.back{font-size:15px}
-@media print{body{background:#fff}.row{display:none}}
-</style>
+<link rel="stylesheet" href="../assets/tool.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+<script src="../assets/tool.js"></script>
 </head>
 <body>
 <main class="wrap">
 <header>
-<a class="back" href="../">자료실로 돌아가기</a>
+<a class="back" href="../">강의 자료 첫 화면으로</a>
 <h1>내 업무 자동화 우선순위 TOP3 표</h1>
-<p class="muted">하루를 적고, 시간으로 재서, 먼저 넘길 일 세 개를 고르는 양식이에요. 빈 양식 두 장과 예시로 채운 판이 있어요.</p>
+<p class="lead"><span class="code">01-02-02</span>하루를 적고, 시간으로 재서, 먼저 넘길 일 세 개를 골라요. 이 화면에서 바로 적으면 돼요.</p>
 </header>
 
-<section class="card">
-<span class="code">01-02-02</span>
-<h2>양식 받기</h2>
-<p class="muted">엑셀 파일(.xlsx)을 내려받아 열어서 바로 적어요. 합계 100 확인과 별표 합계는 자동으로 계산돼요.</p>
-<div class="row">
-<a class="btn" href="top3-form-blank.xlsx" download>빈 양식 내려받기 (xlsx)</a>
-<a class="btn alt" href="top3-form-example.xlsx" download>예시로 채운 판 (xlsx)</a>
-</div>
-<h3>구글 시트로 쓰고 싶으면</h3>
-<ol class="steps">
-<li>구글 드라이브에 위 xlsx 파일을 올려요.</li>
-<li>올린 파일을 열면 구글 시트로 열려요. 위쪽 「파일」 메뉴에서 「Google Sheets로 저장」을 눌러요.</li>
-</ol>
-<p class="muted">장별 CSV로 열고 싶으면 구글 시트에서 「파일」, 「가져오기」, 「업로드」를 눌러요.</p>
-<div class="row">
-<a class="btn alt" href="form-1-day.csv" download>1장 CSV</a>
-<a class="btn alt" href="form-2-top3.csv" download>2장 CSV</a>
-</div>
-<p class="muted">컴퓨터에 엑셀이 없으면 아래 표를 보고 종이나 메모 앱에 같은 칸을 그려서 적어도 돼요.</p>
+<section class="card bar" aria-label="저장">
+<button class="btn" id="saveX" type="button">엑셀 파일로 저장</button>
+<button class="btn alt" id="openX" type="button">저장한 파일 불러오기</button>
+<p class="save-note">적은 내용은 이 브라우저에 자동으로 남아요. 다른 컴퓨터에서 이어 쓰거나 오래 두려면 엑셀 파일로 저장해 두세요.</p>
 </section>
 
-<section class="card">
-<h2>칸 읽는 법</h2>
-<dl><dt>내 시간 중 몇 %</dt><dd>일주일 동안 내가 일한 시간을 100으로 놓고 이 일이 얼마를 먹는지 느낌으로 적어요. 5 · 10 단위면 충분해요.</dd><dt>얼마나 자주</dt><dd>매일 · 주 몇 번 · 매주 · 매달</dd><dt>한 번에 몇 시간</dt><dd>한 번 할 때 붙잡고 있는 시간. 0.5 · 1 · 2시간처럼 적어요.</dd><dt>얼마나 단순한가 1단계</dt><dd>순서표 한 장만 있으면 처음 온 사람도 똑같이 해요. (복사·붙여넣기, 클릭 반복, 정해진 답장)</dd><dt>얼마나 단순한가 2단계</dt><dd>순서표에 「이럴 땐 이렇게」 기준과 예시가 붙어야 해요. 결과를 사람이 한 번 확인해요. (가이드가 있는 디자인, 보고서 초안)</dd><dt>얼마나 단순한가 3단계</dt><dd>경험과 감이 있어야 해요. 순서표로 옮기기 어려워요. (핵심 디자인, 영업, 현장을 눈으로 보는 일, 중요한 결정)</dd><dt>누구에게</dt><dd>1단계는 AI, 2단계는 기준을 만들어 AI나 직원에게 넘기고 사람이 확인, 3단계는 내가 하고 AI는 자료 모으기 같은 준비만 해요. 직원이 없으면 AI와 나 둘로만 나눠도 돼요.</dd><dt>TOP3 ★ 고르는 법</dt><dd>① 3단계는 빼요. ② 매일 하고, 하루 30분 이상 붙잡고, 1단계인 일은 %가 작아도 먼저 ★를 줘요(여러 개면 % 큰 순서). ③ 남은 것은 % 큰 순서로 ★를 이어 줘요. ④ %가 같으면 1단계 먼저, 그래도 같으면 더 자주 하는 일 먼저예요.</dd></dl>
-</section>
+<nav class="tabs" id="tabs" role="tablist" aria-label="양식 장">
+<button class="tab" data-tab="day" type="button">1장 하루 적기</button>
+<button class="tab" data-tab="top3" type="button">2장 TOP3 고르기</button>
+<button class="tab" data-tab="guide" type="button">칸 읽는 법</button>
+<button class="tab" data-tab="ex" type="button">예시</button>
+</nav>
 
-<section class="card">
-<h2>빈 양식</h2>
-<h3>1장. 내 하루 적기</h3>
-<p class="muted">아침에 일을 시작해서 끝낼 때까지 한 일을 시간 순서대로 적어요. 시간은 0.5 · 1 · 2시간처럼 크게만 적어요.</p>
-<div class="scroll"><table class=""><thead><tr><th>언제</th><th>한 일</th><th>걸린 시간 (0.5 · 1 · 2시간)</th><th>매일 / 매주 / 매달</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table></div><h4>매주 · 매달 한 번씩 하는 일 (따로 적어요)</h4><div class="scroll"><table class=""><thead><tr><th>언제</th><th>한 일</th><th>걸린 시간 (0.5 · 1 · 2시간)</th><th>매주 / 매달</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+<section class="card panel" data-panel="day" hidden>
+<h2>1장. 내 하루 적기</h2>
+<p>아침에 일을 시작해서 끝낼 때까지 한 일을 시간 순서대로 적어요. 시간은 0.5 · 1 · 2시간처럼 크게만 적어요.</p>
+<div class="scroll"><table class="mid"><thead><tr><th style="width:16%">언제</th><th>한 일</th><th style="width:20%">걸린 시간 (0.5 · 1 · 2시간)</th><th style="width:20%">매일 / 매주 / 매달</th></tr></thead><tbody id="dayBody"></tbody></table></div>
+<div class="more"><button class="btn alt small" type="button" data-add="day">줄 더하기</button></div>
+<h3>매주 · 매달 한 번씩 하는 일 (따로 적어요)</h3>
+<div class="scroll"><table class="mid"><thead><tr><th style="width:16%">언제</th><th>한 일</th><th style="width:20%">걸린 시간 (0.5 · 1 · 2시간)</th><th style="width:20%">매주 / 매달</th></tr></thead><tbody id="weekBody"></tbody></table></div>
+<div class="more"><button class="btn alt small" type="button" data-add="week">줄 더하기</button></div>
 <p class="note">매일 하는 일만 적고 끝내지 말고, 매주 · 매달 한 번씩 하는 일(정산 · 보고서 · 광고 점검)도 아래 칸에 따로 적어요.</p>
-<h3>2장. TOP3 고르기</h3>
-<p class="muted">1장에서 적은 일을 비슷한 것끼리 묶어 「하는 일」 칸에 한 줄씩 옮겨요.</p>
-<div class="scroll"><table class="top"><thead><tr><th>하는 일 (묶음)</th><th>내 시간 중 몇 % (합계 100)</th><th>얼마나 자주</th><th>한 번에 몇 시간</th><th>얼마나 단순한가 (1·2·3단계)</th><th>누구에게 (AI · 직원 · 나)</th><th>TOP3 ★</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>합계</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
 </section>
 
-<section class="card">
-<h2>예시로 채운 판</h2>
-
-<h3>예시 ① 대표 (온라인몰 대표님, 지어낸 예시)</h3>
-<p class="muted">지어낸 예시예요.</p>
-<div class="scroll"><table class="top"><thead><tr><th>하는 일 (묶음)</th><th>내 시간 중 몇 % (합계 100)</th><th>얼마나 자주</th><th>한 번에 몇 시간</th><th>얼마나 단순한가 (1·2·3단계)</th><th>누구에게 (AI · 직원 · 나)</th><th>TOP3 ★</th></tr></thead><tbody><tr class="star"><td>고객 문의 답장 (카톡 · 톡톡 · 게시판, 교환 접수까지)</td><td>10</td><td>매일</td><td>0.5시간</td><td>1단계</td><td>AI</td><td>★1</td></tr><tr class="star"><td>마케팅 디자인 (배너 · 피드 · 이벤트 이미지)</td><td>20</td><td>매주</td><td>2시간</td><td>2단계</td><td>디자이너 직원 + AI (가이드 먼저)</td><td>★2</td></tr><tr><td>상세페이지 · 제품 디자인 (새 제품 오픈)</td><td>30</td><td>매달</td><td>2시간 이상</td><td>3단계</td><td>나</td><td></td></tr><tr class="star"><td>인스타 · 릴스 마케팅</td><td>15</td><td>매주</td><td>2시간</td><td>2단계</td><td>채용할지 AI와 할지 정하는 중</td><td>★3</td></tr><tr><td>사업 계획 · 성과 숫자 정리</td><td>10</td><td>매달</td><td>2시간</td><td>3단계</td><td>나 (AI가 숫자 모으기만)</td><td></td></tr><tr><td>외부 미팅 (광고사 · 콜라보 작가)</td><td>10</td><td>매주</td><td>1시간</td><td>3단계</td><td>나</td><td></td></tr><tr><td>광고 성과 확인 (광고 운영은 외주)</td><td>5</td><td>매주</td><td>0.5시간</td><td>1단계</td><td>AI</td><td></td></tr><tr><td>합계</td><td>100</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>별표 세 개 넘기면 돌아오는 시간</td><td>45</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
-<p class="note">그래서 이것부터: 3단계(상세페이지, 사업 계획, 외부 미팅)는 빼요. ★1 고객 문의 답장은 %가 10으로 크지 않지만 매일, 0.5시간(30분), 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 마케팅 디자인(20), ★3 인스타 · 릴스 마케팅(15)이에요. 마케팅 디자인은 가이드 한 장을 먼저 만들고 넘기고, 인스타 · 릴스는 채용할지 AI와 같이 할지 먼저 정해요. 셋을 합치면 45예요.</p>
-<details><summary>예시 ② 직장인 (마케팅팀 4년 차, 지어낸 예시)</summary>
-<h4>1장 하루 적기</h4><div class="scroll"><table class=""><thead><tr><th>언제</th><th>한 일</th><th>걸린 시간 (0.5 · 1 · 2시간)</th><th>매일 / 매주 / 매달</th></tr></thead><tbody><tr><td>9시</td><td>밤사이 온 메일 확인 · 답장</td><td>1</td><td>매일</td></tr><tr><td>10시</td><td>팀 회의</td><td>1</td><td>매일</td></tr><tr><td>오후</td><td>제안서 핵심 내용 기획</td><td>2</td><td>매일</td></tr></tbody></table></div><h4>매주 · 매달 한 번씩 하는 일</h4><div class="scroll"><table class=""><thead><tr><th>언제</th><th>한 일</th><th>걸린 시간 (0.5 · 1 · 2시간)</th><th>매주 / 매달</th></tr></thead><tbody><tr><td>11시</td><td>어제 회의 회의록 정리 · 공유</td><td>1</td><td>주 4번</td></tr><tr><td>오후</td><td>다음 주 미팅 일정 조율</td><td>0.5</td><td>주 2번</td></tr><tr><td>금요일</td><td>주간 보고서 (숫자 모으기 + 정리)</td><td>2</td><td>매주</td></tr></tbody></table></div>
-<h4>2장 TOP3 고르기</h4><div class="scroll"><table class="top"><thead><tr><th>하는 일 (묶음)</th><th>내 시간 중 몇 % (합계 100)</th><th>얼마나 자주</th><th>한 번에 몇 시간</th><th>얼마나 단순한가 (1·2·3단계)</th><th>누구에게 (AI · 직원 · 나)</th><th>TOP3 ★</th></tr></thead><tbody><tr class="star"><td>메일 확인 · 답장</td><td>15</td><td>매일</td><td>1시간</td><td>1단계</td><td>AI</td><td>★1</td></tr><tr class="star"><td>주간 보고서</td><td>15</td><td>매주</td><td>2시간</td><td>2단계</td><td>AI 초안 + 내가 확인</td><td>★2</td></tr><tr class="star"><td>회의록 정리 · 공유</td><td>10</td><td>주 4번</td><td>1시간</td><td>1단계</td><td>AI</td><td>★3</td></tr><tr><td>자료 조사 · 정리</td><td>5</td><td>주 2번</td><td>1시간</td><td>2단계</td><td>AI 초안 + 내가 확인</td><td></td></tr><tr><td>일정 조율</td><td>5</td><td>주 2번</td><td>0.5시간</td><td>1단계</td><td>AI</td><td></td></tr><tr><td>회의 참석</td><td>20</td><td>매일</td><td>1시간</td><td>3단계</td><td>나</td><td></td></tr><tr><td>제안서 · 기획 핵심</td><td>30</td><td>매일</td><td>2시간</td><td>3단계</td><td>나</td><td></td></tr><tr><td>합계</td><td>100</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>별표 세 개 넘기면 돌아오는 시간</td><td>40</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
-<p class="note">그래서 이것부터: 3단계(회의 참석, 제안서 · 기획 핵심)는 빼요. ★1 메일 확인 · 답장은 매일, 1시간, 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 주간 보고서(15), ★3 회의록 정리(10)예요. 메일 답장과 회의록은 오늘 바로 AI에게, 보고서는 양식과 기준을 붙여 초안만 AI에게. 돌아온 40을 커리어에 남는 기획 · 제안서에 써요.</p></details>
-<details><summary>예시 ③ 프리랜서 (영상 편집, 지어낸 예시)</summary>
-<div class="scroll"><table class="top"><thead><tr><th>하는 일 (묶음)</th><th>내 시간 중 몇 % (합계 100)</th><th>얼마나 자주</th><th>한 번에 몇 시간</th><th>얼마나 단순한가 (1·2·3단계)</th><th>누구에게 (AI · 직원 · 나)</th><th>TOP3 ★</th></tr></thead><tbody><tr class="star"><td>고객 문의 답장</td><td>15</td><td>매일</td><td>1시간</td><td>1단계</td><td>AI</td><td>★1</td></tr><tr class="star"><td>견적서 작성 (단가표 있음)</td><td>5</td><td>주 2번</td><td>1시간</td><td>1단계</td><td>AI</td><td>★2</td></tr><tr class="star"><td>세금계산서 · 정산</td><td>5</td><td>매달</td><td>2시간</td><td>1단계</td><td>AI</td><td>★3</td></tr><tr><td>수정 요청 정리</td><td>5</td><td>주 3번</td><td>0.5시간</td><td>2단계</td><td>AI 초안 + 내가 확인</td><td></td></tr><tr><td>편집 작업</td><td>50</td><td>매일</td><td>2시간</td><td>3단계</td><td>나</td><td></td></tr><tr><td>고객 미팅 · 통화</td><td>10</td><td>매주</td><td>2시간</td><td>3단계</td><td>나</td><td></td></tr><tr><td>포트폴리오 · 새 고객 찾기</td><td>10</td><td>매주</td><td>2시간</td><td>3단계</td><td>나</td><td></td></tr><tr><td>합계</td><td>100</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>별표 세 개 넘기면 돌아오는 시간</td><td>25</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
-<p class="note">그래서 이것부터: 문의 답장을 먼저 AI에게. 견적서와 정산은 %는 작아도 1단계라 같이 넘겨요. 정산은 매달 한 번이지만 한 번에 2시간이라 오래 붙잡는 일이에요. 돌아온 시간을 편집 작업과 새 고객 찾기에 써요.</p></details>
-
-<p class="muted" style="margin-top:14px">예시 CSV: <a href="example-1-ceo.csv" download>대표</a> · <a href="example-2-office-day.csv" download>직장인 1장</a> · <a href="example-2-office-top3.csv" download>직장인 2장</a> · <a href="example-3-freelancer.csv" download>프리랜서</a></p>
+<section class="card panel" data-panel="top3" hidden>
+<h2>2장. TOP3 고르기</h2>
+<p>1장에서 적은 일을 비슷한 것끼리 묶어 「하는 일」 칸에 한 줄씩 옮겨요.</p>
+<div class="scroll"><table class="wide"><thead><tr><th>하는 일 (묶음)</th><th style="width:11%">내 시간 중 몇 % (합계 100)</th><th style="width:12%">얼마나 자주</th><th style="width:12%">한 번에 몇 시간</th><th style="width:12%">얼마나 단순한가 (1·2·3단계)</th><th style="width:15%">누구에게 (AI · 직원 · 나)</th><th style="width:9%">TOP3 ★</th></tr></thead>
+<tbody id="topBody"></tbody>
+<tfoot id="topFoot"></tfoot></table></div>
+<div class="more"><button class="btn alt small" type="button" data-add="top">줄 더하기</button></div>
+<p class="note">별표는 「TOP3 ★」 칸에서 ★1, ★2, ★3을 고르면 돼요. 고르는 순서는 「칸 읽는 법」 탭의 「TOP3 ★ 고르는 법」에 있어요.</p>
 </section>
+
+<section class="card panel" data-panel="guide" hidden>
+<h2>칸 읽는 법</h2>
+<div class="scroll"><table class="mid"><thead><tr><th style="width:24%">칸</th><th>읽는 법</th></tr></thead><tbody id="guideBody"></tbody></table></div>
+</section>
+
+<section class="card panel" data-panel="ex" hidden>
+<h2>예시</h2>
+<p>지어낸 예시예요. 채우면 이런 모습이에요. 예시는 고칠 수 없고 보기만 해요.</p>
+<nav class="tabs sub" id="exTabs" role="tablist" aria-label="예시 고르기" style="margin-top:12px">
+<button class="tab" data-tab="ex1" type="button">예시1 대표 2장</button>
+<button class="tab" data-tab="ex2a" type="button">예시2 직장인 1장</button>
+<button class="tab" data-tab="ex2b" type="button">예시2 직장인 2장</button>
+<button class="tab" data-tab="ex3" type="button">예시3 프리랜서 2장</button>
+</nav>
+<div id="exView"></div>
+</section>
+
+<p class="foot">엑셀로 따로 쓰고 싶으면 <a href="top3-form-blank.xlsx" download>빈 양식 엑셀 파일</a>을 내려받아도 돼요(선택). · <button class="btn text" id="reset" type="button">처음부터 다시 쓰기</button></p>
 </main>
+
+<script>
+(function(){
+var KEY="facam-01-02-02-v1";
+var FREQ=["매일","주 1번","주 2번","주 3번","주 4번","주 5번","매주","매달"];
+var HRS2=["0.5시간","1시간","2시간","2시간 이상"];
+var LV=["1단계","2단계","3단계"];
+var STAR=["★1","★2","★3"];
+var BASE={day:10,week:4,top:10};
+var W={day:4,week:4,top:7};
+var GUIDE=[
+["내 시간 중 몇 %","일주일 동안 내가 일한 시간을 100으로 놓고 이 일이 얼마를 먹는지 느낌으로 적어요. 5 · 10 단위면 충분해요."],
+["얼마나 자주","매일 · 주 몇 번 · 매주 · 매달"],
+["한 번에 몇 시간","한 번 할 때 붙잡고 있는 시간. 0.5 · 1 · 2시간처럼 적어요."],
+["얼마나 단순한가 1단계","순서표 한 장만 있으면 처음 온 사람도 똑같이 해요. (복사·붙여넣기, 클릭 반복, 정해진 답장)"],
+["얼마나 단순한가 2단계","순서표에 「이럴 땐 이렇게」 기준과 예시가 붙어야 해요. 결과를 사람이 한 번 확인해요. (가이드가 있는 디자인, 보고서 초안)"],
+["얼마나 단순한가 3단계","경험과 감이 있어야 해요. 순서표로 옮기기 어려워요. (핵심 디자인, 영업, 현장을 눈으로 보는 일, 중요한 결정)"],
+["누구에게","1단계는 AI, 2단계는 기준을 만들어 AI나 직원에게 넘기고 사람이 확인, 3단계는 내가 하고 AI는 자료 모으기 같은 준비만 해요. 직원이 없으면 AI와 나 둘로만 나눠도 돼요."],
+["TOP3 ★ 고르는 법","① 3단계는 빼요. ② 매일 하고, 하루 30분 이상 붙잡고, 1단계인 일은 %가 작아도 먼저 ★를 줘요(여러 개면 % 큰 순서). ③ 남은 것은 % 큰 순서로 ★를 이어 줘요. ④ %가 같으면 1단계 먼저, 그래도 같으면 더 자주 하는 일 먼저예요."]];
+var EX={
+ex1:{title:"예시 ① 대표 (온라인몰 대표님, 지어낸 예시)",top:[
+["고객 문의 답장 (카톡 · 톡톡 · 게시판, 교환 접수까지)",10,"매일","0.5시간","1단계","AI","★1"],
+["마케팅 디자인 (배너 · 피드 · 이벤트 이미지)",20,"매주","2시간","2단계","디자이너 직원 + AI (가이드 먼저)","★2"],
+["상세페이지 · 제품 디자인 (새 제품 오픈)",30,"매달","2시간 이상","3단계","나",""],
+["인스타 · 릴스 마케팅",15,"매주","2시간","2단계","채용할지 AI와 할지 정하는 중","★3"],
+["사업 계획 · 성과 숫자 정리",10,"매달","2시간","3단계","나 (AI가 숫자 모으기만)",""],
+["외부 미팅 (광고사 · 콜라보 작가)",10,"매주","1시간","3단계","나",""],
+["광고 성과 확인 (광고 운영은 외주)",5,"매주","0.5시간","1단계","AI",""]],
+so:"그래서 이것부터: 3단계(상세페이지, 사업 계획, 외부 미팅)는 빼요. ★1 고객 문의 답장은 %가 10으로 크지 않지만 매일, 0.5시간(30분), 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 마케팅 디자인(20), ★3 인스타 · 릴스 마케팅(15)이에요. 마케팅 디자인은 가이드 한 장을 먼저 만들고 넘기고, 인스타 · 릴스는 채용할지 AI와 같이 할지 먼저 정해요. 셋을 합치면 45예요."},
+ex2a:{title:"1장. 내 하루 적기",made:"지어낸 예시: 마케팅팀 4년 차 직장인의 하루예요.",day:[
+["9시","밤사이 온 메일 확인 · 답장","1","매일"],["10시","팀 회의","1","매일"],["오후","제안서 핵심 내용 기획","2","매일"]],week:[
+["11시","어제 회의 회의록 정리 · 공유","1","주 4번"],["오후","다음 주 미팅 일정 조율","0.5","주 2번"],["금요일","주간 보고서 (숫자 모으기 + 정리)","2","매주"]]},
+ex2b:{title:"예시 ② 직장인 (마케팅팀 4년 차) 2장",top:[
+["메일 확인 · 답장",15,"매일","1시간","1단계","AI","★1"],
+["주간 보고서",15,"매주","2시간","2단계","AI 초안 + 내가 확인","★2"],
+["회의록 정리 · 공유",10,"주 4번","1시간","1단계","AI","★3"],
+["자료 조사 · 정리",5,"주 2번","1시간","2단계","AI 초안 + 내가 확인",""],
+["일정 조율",5,"주 2번","0.5시간","1단계","AI",""],
+["회의 참석",20,"매일","1시간","3단계","나",""],
+["제안서 · 기획 핵심",30,"매일","2시간","3단계","나",""]],
+so:"그래서 이것부터: 3단계(회의 참석, 제안서 · 기획 핵심)는 빼요. ★1 메일 확인 · 답장은 매일, 1시간, 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 주간 보고서(15), ★3 회의록 정리(10)예요. 메일 답장과 회의록은 오늘 바로 AI에게, 보고서는 양식과 기준을 붙여 초안만 AI에게. 돌아온 40을 커리어에 남는 기획 · 제안서에 써요."},
+ex3:{title:"예시 ③ 프리랜서 (영상 편집) 2장",top:[
+["고객 문의 답장",15,"매일","1시간","1단계","AI","★1"],
+["견적서 작성 (단가표 있음)",5,"주 2번","1시간","1단계","AI","★2"],
+["세금계산서 · 정산",5,"매달","2시간","1단계","AI","★3"],
+["수정 요청 정리",5,"주 3번","0.5시간","2단계","AI 초안 + 내가 확인",""],
+["편집 작업",50,"매일","2시간","3단계","나",""],
+["고객 미팅 · 통화",10,"매주","2시간","3단계","나",""],
+["포트폴리오 · 새 고객 찾기",10,"매주","2시간","3단계","나",""]],
+so:"그래서 이것부터: 문의 답장을 먼저 AI에게. 견적서와 정산은 %는 작아도 1단계라 같이 넘겨요. 정산은 매달 한 번이지만 한 번에 2시간이라 오래 붙잡는 일이에요. 돌아온 시간을 편집 작업과 새 고객 찾기에 써요."}};
+
+function blank(n,w){ var a=[]; for(var i=0;i<n;i++){ var r=[]; for(var j=0;j<w;j++) r.push(""); a.push(r);} return a; }
+function fresh(){ return {day:blank(BASE.day,W.day),week:blank(BASE.week,W.week),top:blank(BASE.top,W.top)}; }
+var S=T.load(KEY)||fresh();
+["day","week","top"].forEach(function(k){ if(!Array.isArray(S[k])) S[k]=[]; while(S[k].length<BASE[k]) S[k].push(blank(1,W[k])[0]); });
+function persist(){ T.save(KEY,S); }
+
+function sel(opts,v,k,cls){ var h='<select data-k="'+k+'"'+(cls?' class="'+cls+'"':'')+'><option value=""></option>'; opts.forEach(function(o){ h+='<option'+(o===String(v)?' selected':'')+'>'+o+'</option>'; }); return h+'</select>'; }
+function txt(v,k,ph){ return '<input type="text" data-k="'+k+'" value="'+T.esc(v)+'"'+(ph?' placeholder="'+ph+'"':'')+'>'; }
+function hrs(v,k){ return '<input type="number" inputmode="decimal" min="0" max="24" step="0.5" data-k="'+k+'" value="'+T.esc(v)+'">'; }
+function num(v,k){ return '<input type="number" inputmode="numeric" min="0" max="100" step="5" data-k="'+k+'" value="'+T.esc(v)+'">'; }
+
+function renderDay(){
+  document.getElementById("dayBody").innerHTML=S.day.map(function(r,i){ return '<tr><td>'+txt(r[0],"day."+i+".0",i?"":"9시")+'</td><td>'+txt(r[1],"day."+i+".1",i?"":"출근해서 처음 한 일")+'</td><td>'+hrs(r[2],"day."+i+".2")+'</td><td>'+sel(FREQ,r[3],"day."+i+".3")+'</td></tr>'; }).join("");
+  document.getElementById("weekBody").innerHTML=S.week.map(function(r,i){ return '<tr><td>'+txt(r[0],"week."+i+".0",i?"":"금요일")+'</td><td>'+txt(r[1],"week."+i+".1")+'</td><td>'+hrs(r[2],"week."+i+".2")+'</td><td>'+sel(FREQ,r[3],"week."+i+".3")+'</td></tr>'; }).join("");
+}
+function renderTop(){
+  document.getElementById("topBody").innerHTML=S.top.map(function(r,i){ var p="top."+i+".";
+    return '<tr><td>'+txt(r[0],p+0)+'</td><td>'+num(r[1],p+1)+'</td><td>'+sel(FREQ,r[2],p+2)+'</td><td>'+sel(HRS2,r[3],p+3)+'</td><td>'+sel(LV,r[4],p+4)+'</td><td>'+txt(r[5],p+5,i?"":"AI · 직원 · 나")+'</td><td>'+sel(STAR,r[6],p+6,"star")+'</td></tr>'; }).join("");
+  renderFoot();
+}
+function sums(rows){ var t=0,s=0,any=false; rows.forEach(function(r){ var v=parseFloat(r[1]); if(!isNaN(v)){ any=true; t+=v; if(/^★/.test(r[6]||"")) s+=v; } }); return {any:any,t:t,s:s}; }
+function footHtml(rows){
+  var m=sums(rows); if(m.t===0) m.any=false;
+  var badge=!m.any?"":(m.t===100?'<span class="ok">100 맞아요</span>':'<span class="warn">합계를 100으로 맞춰요</span>');
+  return '<tr class="sum"><td>합계</td><td class="big">'+(m.any?m.t:"")+'</td><td colspan="5">'+badge+'</td></tr>'+
+         '<tr class="sum"><td>별표 세 개 넘기면 돌아오는 시간</td><td class="big">'+(m.s?m.s:"")+'</td><td colspan="5"></td></tr>';
+}
+function renderFoot(){ document.getElementById("topFoot").innerHTML=footHtml(S.top); }
+function renderGuide(){ document.getElementById("guideBody").innerHTML=GUIDE.map(function(g){ return '<tr><td class="read k">'+g[0]+'</td><td class="read">'+g[1]+'</td></tr>'; }).join(""); }
+
+function readTable(rows,heads){ return '<div class="scroll"><table class="'+(heads.length>4?"wide":"mid")+'"><thead><tr>'+heads.map(function(h){return "<th>"+h+"</th>";}).join("")+'</tr></thead><tbody>'+rows.map(function(r){ return "<tr>"+r.map(function(c,j){ return '<td class="read"'+(j===6&&c?' style="color:var(--orange-hover);font-weight:800"':'')+'>'+T.esc(c)+'</td>'; }).join("")+"</tr>"; }).join("")+'</tbody>'+(heads.length>4?'<tfoot>'+footHtml(rows)+'</tfoot>':'')+'</table></div>'; }
+var H1=["언제","한 일","걸린 시간 (0.5 · 1 · 2시간)","매일 / 매주 / 매달"];
+var H1W=["언제","한 일","걸린 시간 (0.5 · 1 · 2시간)","매주 / 매달"];
+var H2=["하는 일 (묶음)","내 시간 중 몇 % (합계 100)","얼마나 자주","한 번에 몇 시간","얼마나 단순한가 (1·2·3단계)","누구에게 (AI · 직원 · 나)","TOP3 ★"];
+function renderEx(name){
+  var e=EX[name]; if(!e) return; var h='<h3>'+T.esc(e.title)+'</h3>';
+  if(e.day){ h+=readTable(e.day,H1)+'<h3>매주 · 매달 한 번씩 하는 일 (따로 적어요)</h3>'+readTable(e.week,H1W)+'<p class="made-up">'+T.esc(e.made)+'</p>'; }
+  else { h+='<p class="made-up">지어낸 예시예요.</p>'+readTable(e.top,H2)+'<p class="note">'+T.esc(e.so)+'</p>'; }
+  document.getElementById("exView").innerHTML=h;
+}
+
+document.addEventListener("input",onEdit); document.addEventListener("change",onEdit);
+function onEdit(ev){ var k=ev.target.dataset&&ev.target.dataset.k; if(!k) return; var p=k.split("."); S[p[0]][+p[1]][+p[2]]=ev.target.value; persist(); if(p[0]==="top") renderFoot(); }
+document.querySelectorAll("[data-add]").forEach(function(b){ b.addEventListener("click",function(){ var k=b.dataset.add; S[k].push(blank(1,W[k])[0]); persist(); k==="top"?renderTop():renderDay(); }); });
+document.getElementById("reset").addEventListener("click",function(){ if(!confirm("적은 내용을 모두 지우고 빈 양식으로 돌아갈까요? 엑셀로 저장해 둔 파일은 그대로 남아요.")) return; S=fresh(); persist(); renderDay(); renderTop(); T.toast("빈 양식으로 돌아왔어요"); });
+
+/* 엑셀 저장: 내려받은 파일도 「100 맞아요」와 별표 합계가 자동으로 계산되게 수식을 넣어요 */
+function cut(rows){ var a=rows.slice(); while(a.length&&a[a.length-1].every(function(c){return c==="";})) a.pop(); return a; }
+document.getElementById("saveX").addEventListener("click",function(){
+  if(!T.xlsxReady()) return; var wb=XLSX.utils.book_new();
+  var day=S.day.slice(), week=S.week.slice();
+  var a1=[["1장. 내 하루 적기"],["아침에 일을 시작해서 끝낼 때까지 한 일을 시간 순서대로 적어요. 시간은 0.5 · 1 · 2시간처럼 크게만 적어요."],[],H1]
+    .concat(day.map(function(r){return [r[0],r[1],r[2]===""?"":+r[2],r[3]];})).concat([[],["매주 · 매달 한 번씩 하는 일 (따로 적어요)"],H1W])
+    .concat(week.map(function(r){return [r[0],r[1],r[2]===""?"":+r[2],r[3]];})).concat([[],["매일 하는 일만 적고 끝내지 말고, 매주 · 매달 한 번씩 하는 일(정산 · 보고서 · 광고 점검)도 아래 칸에 따로 적어요."]]);
+  var s1=XLSX.utils.aoa_to_sheet(a1); s1["!cols"]=[{wch:12},{wch:40},{wch:22},{wch:18}];
+  var top=S.top, n=top.length, last=4+n;
+  var a2=[["2장. TOP3 고르기"],["1장에서 적은 일을 비슷한 것끼리 묶어 「하는 일」 칸에 한 줄씩 옮겨요."],[],H2]
+    .concat(top.map(function(r){return [r[0],r[1]===""?"":+r[1],r[2],r[3],r[4],r[5],r[6]];}))
+    .concat([["합계",{t:"n",f:'IF(SUM(B5:B'+last+')=0,"",SUM(B5:B'+last+'))'},{t:"s",f:'IF(B'+(last+1)+'="","",IF(B'+(last+1)+'=100,"100 맞아요","합계를 100으로 맞춰요"))'}],
+             ["별표 세 개 넘기면 돌아오는 시간",{t:"n",f:'IF(SUMIF(G5:G'+last+',"★*",B5:B'+last+')=0,"",SUMIF(G5:G'+last+',"★*",B5:B'+last+'))'}]]);
+  var s2=XLSX.utils.aoa_to_sheet(a2); s2["!cols"]=[{wch:40},{wch:14},{wch:12},{wch:12},{wch:14},{wch:24},{wch:9}];
+  var s3=XLSX.utils.aoa_to_sheet([["칸 읽는 법"],[],["칸","읽는 법"]].concat(GUIDE)); s3["!cols"]=[{wch:24},{wch:90}];
+  XLSX.utils.book_append_sheet(wb,s1,"1장 하루 적기"); XLSX.utils.book_append_sheet(wb,s2,"2장 TOP3 고르기"); XLSX.utils.book_append_sheet(wb,s3,"칸 읽는 법");
+  T.download(wb,"내 업무 우선순위 TOP3 표.xlsx"); T.toast("엑셀 파일로 저장했어요");
+});
+/* 불러오기: 이 페이지에서 저장한 파일, 또는 빈 양식 엑셀에 적은 파일 */
+function parseDay(r){
+  var hs=[]; r.forEach(function(x,i){ if(String(x[0]).trim()==="언제") hs.push(i); });
+  function take(from,stop){ var out=[]; for(var i=from;i<r.length;i++){ var a=String(r[i][0]); if(stop(a)) break; out.push([r[i][0],r[i][1],r[i][2],r[i][3]].map(function(c){return String(c==null?"":c).trim();})); } return cut(out); }
+  return {day:hs.length?take(hs[0]+1,function(a){return /^매주 · 매달/.test(a);}):[], week:hs.length>1?take(hs[1]+1,function(a){return /^매일 하는 일만/.test(a);}):[]};
+}
+function normHrs(v){ v=String(v).trim(); if(!v) return ""; if(HRS2.indexOf(v)>=0) return v; var m=parseFloat(v); if(isNaN(m)) return v; return m>2?"2시간 이상":(m+"시간"); }
+function parseTop(r){ var h=-1; r.forEach(function(x,i){ if(h<0&&/^하는 일/.test(String(x[0]).trim())) h=i; }); if(h<0) return [];
+  var out=[]; for(var i=h+1;i<r.length;i++){ if(String(r[i][0]).trim()==="합계") break; var x=r[i].slice(0,7).map(function(c){return String(c==null?"":c).trim();}); while(x.length<7) x.push(""); x[3]=normHrs(x[3]); out.push(x); } return cut(out); }
+document.getElementById("openX").addEventListener("click",function(){
+  if(!T.xlsxReady()) return;
+  T.pickFile(function(wb){
+    var d=wb.Sheets["1장 하루 적기"], t=wb.Sheets["2장 TOP3 고르기"];
+    if(!d&&!t){ T.toast("이 파일에는 「1장 하루 적기」나 「2장 TOP3 고르기」 탭이 없어요."); return; }
+    if(d){ var p=parseDay(T.rows(d)); S.day=p.day; S.week=p.week; }
+    if(t){ S.top=parseTop(T.rows(t)); }
+    ["day","week","top"].forEach(function(k){ S[k]=S[k].map(function(r){ r=r.slice(0,W[k]); while(r.length<W[k]) r.push(""); return r; }); while(S[k].length<BASE[k]) S[k].push(blank(1,W[k])[0]); });
+    persist(); renderDay(); renderTop(); T.toast("저장한 파일을 불러왔어요");
+  });
+});
+
+renderDay(); renderTop(); renderGuide();
+var exPick=null;
+var showEx=T.tabs(document.getElementById("exTabs"),function(n){ exPick=n; renderEx(n); });
+var show=T.tabs(document.getElementById("tabs"),function(n){ if(n==="ex") showEx(exPick||"ex1",false); });
+var hash=(location.hash||"").slice(1);
+if(EX[hash]){ exPick=hash; show("ex",false); } else show(hash,false);
+})();
+</script>
 </body>
 </html>
