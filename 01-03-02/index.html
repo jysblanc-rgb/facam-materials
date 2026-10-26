@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>지시 점검표</title>
+<title>지시 점검표와 파트 1 진단 한 장</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="../assets/tool.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
@@ -34,7 +34,7 @@
 <section class="card panel" data-panel="five" hidden>
 <h2>1장. 한마디에 빠진 다섯 가지</h2>
 <p>「인스타 릴스 하나 기획해서 가져와 봐」 같은 한마디에는 아래 다섯 가지가 빠져 있어요.</p>
-<div class="scroll"><table class="mid"><thead><tr><th style="width:18%">다섯 가지</th><th style="width:28%">묻는 말</th><th>컨설팅·교육에서 실제로 쓰는 말</th></tr></thead><tbody id="fiveBody"></tbody></table></div>
+<div class="scroll"><table class="mid"><thead><tr><th style="width:18%">다섯 가지</th><th style="width:28%">묻는 말</th><th>예를 들면</th></tr></thead><tbody id="fiveBody"></tbody></table></div>
 <p class="note">한 줄 정리: 성공한 결과의 모습을 다 넣어 두고 그대로 하게 하면, 누가 와도 평균 이상은 나와요. 이걸 매번 말로 하지 않게 문서로 만든 게 파트 3에서 쓰는 업무 지시서예요.</p>
 </section>
 
@@ -49,7 +49,7 @@
 
 <section class="card panel" data-panel="diag" hidden>
 <h2>3장. 파트 1 진단 한 장</h2>
-<p>파트 1에서 적은 것을 한 칸씩 옮겨 와요. 같은 브라우저에서 01-02-02 표와 2장 지시 점검표를 적었다면 그 두 줄은 자동으로 채워져요. 고쳐 써도 돼요.</p>
+<p>파트 1에서 적은 것을 한 칸씩 옮겨 와요. 같은 브라우저에서 「내 업무 자동화 우선순위 TOP3 표」와 2장 지시 점검표를 적었다면 그 두 줄은 자동으로 채워져요. 고쳐 써도 돼요.</p>
 <div class="scroll"><table class="wide"><thead><tr><th style="width:24%">어디서</th><th style="width:26%">옮겨 적을 것</th><th>내 답</th></tr></thead><tbody id="diagBody"></tbody></table></div>
 <p class="note">이 빈 곳은 파트 2에서 비서가 일할 자리(자료 둘 곳·도구 연결)를 만들고, 파트 3에서 지시서로 채워 가요.</p>
 </section>
@@ -130,7 +130,7 @@ document.getElementById("reset").addEventListener("click",function(){ if(!confir
 
 document.getElementById("saveX").addEventListener("click",function(){
   if(!T.xlsxReady()) return; syncAuto(); var wb=XLSX.utils.book_new();
-  var s1=XLSX.utils.aoa_to_sheet([["1장. 한마디에 빠진 다섯 가지"],["「인스타 릴스 하나 기획해서 가져와 봐」 같은 한마디에는 아래 다섯 가지가 빠져 있어요."],[],["다섯 가지","묻는 말","컨설팅·교육에서 실제로 쓰는 말"]].concat(FIVE)); s1["!cols"]=[{wch:16},{wch:28},{wch:70}];
+  var s1=XLSX.utils.aoa_to_sheet([["1장. 한마디에 빠진 다섯 가지"],["「인스타 릴스 하나 기획해서 가져와 봐」 같은 한마디에는 아래 다섯 가지가 빠져 있어요."],[],["다섯 가지","묻는 말","예를 들면"]].concat(FIVE)); s1["!cols"]=[{wch:16},{wch:28},{wch:70}];
   var miss=missing(S.m);
   var a2=[["2장. 지시 점검표"],["내가 평소 일 시키는 말 한 줄을 적고, 다섯 가지가 그 말 안에 있는지 표시해요."],[],["내가 평소 일 시키는 말 한 줄",S.line],[],["다섯 가지","내 말에 있나","왜 그렇게 봤나 (메모)"]]
     .concat(FIVE.map(function(f,i){return [f[0],S.m[i],S.memo[i]];}))

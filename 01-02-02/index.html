@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>업무 우선순위 TOP3 표</title>
+<title>내 업무 자동화 우선순위 TOP3 표</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="../assets/tool.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
@@ -44,12 +44,12 @@
 
 <section class="card panel" data-panel="top3" hidden>
 <h2>2장. TOP3 고르기</h2>
-<p>1장에서 적은 일을 비슷한 것끼리 묶어 「하는 일」 칸에 한 줄씩 옮겨요.</p>
-<div class="scroll"><table class="wide"><thead><tr><th>하는 일 (묶음)</th><th style="width:11%">내 시간 중 몇 % (합계 100)</th><th style="width:12%">얼마나 자주</th><th style="width:12%">한 번에 몇 시간</th><th style="width:12%">얼마나 단순한가 (1·2·3단계)</th><th style="width:15%">누구에게 (AI · 직원 · 나)</th><th style="width:9%">TOP3 ★</th></tr></thead>
+<p>1장에 적은 일을 「하는 일」 칸에 옮겨요. 같은 일은 한 줄로 모아요.</p>
+<div class="scroll"><table class="wide"><thead><tr><th>하는 일</th><th style="width:11%">내 시간 중 몇 % (합계 100)</th><th style="width:12%">얼마나 자주</th><th style="width:12%">한 번에 몇 시간</th><th style="width:12%">얼마나 단순한가 (1·2·3단계)</th><th style="width:15%">누구에게 (AI · 직원 · 나)</th><th style="width:9%">TOP3 ★</th></tr></thead>
 <tbody id="topBody"></tbody>
 <tfoot id="topFoot"></tfoot></table></div>
 <div class="more"><button class="btn alt small" type="button" data-add="top">줄 더하기</button></div>
-<p class="note">별표는 「TOP3 ★」 칸에서 ★1, ★2, ★3을 고르면 돼요. 고르는 순서는 「칸 읽는 법」 탭의 「TOP3 ★ 고르는 법」에 있어요.</p>
+<p class="note">별표는 「TOP3 ★」 칸에서 ★1, ★2, ★3을 고르면 돼요. 고르는 순서는 「칸 읽는 법」 탭의 「별표 치는 순서」에 있어요.</p>
 </section>
 
 <section class="card panel" data-panel="guide" hidden>
@@ -89,7 +89,7 @@ var GUIDE=[
 ["얼마나 단순한가 2단계","순서표에 「이럴 땐 이렇게」 기준과 예시가 붙어야 해요. 결과를 사람이 한 번 확인해요. (가이드가 있는 디자인, 보고서 초안)"],
 ["얼마나 단순한가 3단계","경험과 감이 있어야 해요. 순서표로 옮기기 어려워요. (핵심 디자인, 영업, 현장을 눈으로 보는 일, 중요한 결정)"],
 ["누구에게","1단계는 AI, 2단계는 기준을 만들어 AI나 직원에게 넘기고 사람이 확인, 3단계는 내가 하고 AI는 자료 모으기 같은 준비만 해요. 직원이 없으면 AI와 나 둘로만 나눠도 돼요."],
-["TOP3 ★ 고르는 법","① 3단계는 빼요. ② 매일 하고, 하루 30분 이상 붙잡고, 1단계인 일은 %가 작아도 먼저 ★를 줘요(여러 개면 % 큰 순서). ③ 남은 것은 % 큰 순서로 ★를 이어 줘요. ④ %가 같으면 1단계 먼저, 그래도 같으면 더 자주 하는 일 먼저예요."]];
+["별표 치는 순서","① 3단계는 빼요. ② 매일 하고, 하루 30분 이상 붙잡고, 1단계인 일은 %가 작아도 먼저 ★를 줘요(여러 개면 % 큰 순서). ③ 남은 것은 % 큰 순서로 ★를 이어 줘요. ④ %가 같으면 1단계 먼저, 그래도 같으면 더 자주 하는 일 먼저예요."]];
 var EX={
 ex1:{title:"예시 ① 대표 (온라인몰 대표님, 지어낸 예시)",top:[
 ["고객 문의 답장 (카톡 · 톡톡 · 게시판, 교환 접수까지)",10,"매일","0.5시간","1단계","AI","★1"],
@@ -101,8 +101,8 @@ ex1:{title:"예시 ① 대표 (온라인몰 대표님, 지어낸 예시)",top:[
 ["광고 성과 확인 (광고 운영은 외주)",5,"매주","0.5시간","1단계","AI",""]],
 so:"그래서 이것부터: 3단계(상세페이지, 사업 계획, 외부 미팅)는 빼요. ★1 고객 문의 답장은 %가 10으로 크지 않지만 매일, 0.5시간(30분), 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 마케팅 디자인(20), ★3 인스타 · 릴스 마케팅(15)이에요. 마케팅 디자인은 가이드 한 장을 먼저 만들고 넘기고, 인스타 · 릴스는 채용할지 AI와 같이 할지 먼저 정해요. 셋을 합치면 45예요."},
 ex2a:{title:"1장. 내 하루 적기",made:"지어낸 예시: 마케팅팀 4년 차 직장인의 하루예요.",day:[
-["9시","밤사이 온 메일 확인 · 답장","1","매일"],["10시","팀 회의","1","매일"],["오후","제안서 핵심 내용 기획","2","매일"]],week:[
-["11시","어제 회의 회의록 정리 · 공유","1","주 4번"],["오후","다음 주 미팅 일정 조율","0.5","주 2번"],["금요일","주간 보고서 (숫자 모으기 + 정리)","2","매주"]]},
+["9시","밤사이 온 메일 확인 · 답장","1","매일"],["10시","팀 회의","1","매일"],["11시","어제 회의 회의록 정리 · 공유","1","주 4번"],["오후","자료 조사 · 정리","1","주 2번"],["오후","다음 주 미팅 일정 조율","0.5","주 2번"],["오후","제안서 핵심 내용 기획","2","매일"],["퇴근 전","퇴근 전 메일 답장","0.5","매일"]],week:[
+["금요일","주간 보고서 (숫자 모으기 + 정리)","2","매주"]]},
 ex2b:{title:"예시 ② 직장인 (마케팅팀 4년 차) 2장",top:[
 ["메일 확인 · 답장",15,"매일","1시간","1단계","AI","★1"],
 ["주간 보고서",15,"매주","2시간","2단계","AI 초안 + 내가 확인","★2"],
@@ -147,7 +147,7 @@ function footHtml(rows){
   var m=sums(rows); if(m.t===0) m.any=false;
   var badge=!m.any?"":(m.t===100?'<span class="ok">100 맞아요</span>':'<span class="warn">합계를 100으로 맞춰요</span>');
   return '<tr class="sum"><td>합계</td><td class="big">'+(m.any?m.t:"")+'</td><td colspan="5">'+badge+'</td></tr>'+
-         '<tr class="sum"><td>별표 세 개 넘기면 돌아오는 시간</td><td class="big">'+(m.s?m.s:"")+'</td><td colspan="5"></td></tr>';
+         '<tr class="sum"><td>TOP3 합계</td><td class="big">'+(m.s?m.s:"")+'</td><td colspan="5"></td></tr>';
 }
 function renderFoot(){ document.getElementById("topFoot").innerHTML=footHtml(S.top); }
 function renderGuide(){ document.getElementById("guideBody").innerHTML=GUIDE.map(function(g){ return '<tr><td class="read k">'+g[0]+'</td><td class="read">'+g[1]+'</td></tr>'; }).join(""); }
@@ -155,7 +155,7 @@ function renderGuide(){ document.getElementById("guideBody").innerHTML=GUIDE.map
 function readTable(rows,heads){ return '<div class="scroll"><table class="'+(heads.length>4?"wide":"mid")+'"><thead><tr>'+heads.map(function(h){return "<th>"+h+"</th>";}).join("")+'</tr></thead><tbody>'+rows.map(function(r){ return "<tr>"+r.map(function(c,j){ return '<td class="read"'+(j===6&&c?' style="color:var(--orange-hover);font-weight:800"':'')+'>'+T.esc(c)+'</td>'; }).join("")+"</tr>"; }).join("")+'</tbody>'+(heads.length>4?'<tfoot>'+footHtml(rows)+'</tfoot>':'')+'</table></div>'; }
 var H1=["언제","한 일","걸린 시간 (0.5 · 1 · 2시간)","매일 / 매주 / 매달"];
 var H1W=["언제","한 일","걸린 시간 (0.5 · 1 · 2시간)","매주 / 매달"];
-var H2=["하는 일 (묶음)","내 시간 중 몇 % (합계 100)","얼마나 자주","한 번에 몇 시간","얼마나 단순한가 (1·2·3단계)","누구에게 (AI · 직원 · 나)","TOP3 ★"];
+var H2=["하는 일","내 시간 중 몇 % (합계 100)","얼마나 자주","한 번에 몇 시간","얼마나 단순한가 (1·2·3단계)","누구에게 (AI · 직원 · 나)","TOP3 ★"];
 function renderEx(name){
   var e=EX[name]; if(!e) return; var h='<h3>'+T.esc(e.title)+'</h3>';
   if(e.day){ h+=readTable(e.day,H1)+'<h3>매주 · 매달 한 번씩 하는 일 (따로 적어요)</h3>'+readTable(e.week,H1W)+'<p class="made-up">'+T.esc(e.made)+'</p>'; }
@@ -178,14 +178,14 @@ document.getElementById("saveX").addEventListener("click",function(){
     .concat(week.map(function(r){return [r[0],r[1],r[2]===""?"":+r[2],r[3]];})).concat([[],["매일 하는 일만 적고 끝내지 말고, 매주 · 매달 한 번씩 하는 일(정산 · 보고서 · 광고 점검)도 아래 칸에 따로 적어요."]]);
   var s1=XLSX.utils.aoa_to_sheet(a1); s1["!cols"]=[{wch:12},{wch:40},{wch:22},{wch:18}];
   var top=S.top, n=top.length, last=4+n;
-  var a2=[["2장. TOP3 고르기"],["1장에서 적은 일을 비슷한 것끼리 묶어 「하는 일」 칸에 한 줄씩 옮겨요."],[],H2]
+  var a2=[["2장. TOP3 고르기"],["1장에 적은 일을 「하는 일」 칸에 옮겨요. 같은 일은 한 줄로 모아요."],[],H2]
     .concat(top.map(function(r){return [r[0],r[1]===""?"":+r[1],r[2],r[3],r[4],r[5],r[6]];}))
     .concat([["합계",{t:"n",f:'IF(SUM(B5:B'+last+')=0,"",SUM(B5:B'+last+'))'},{t:"s",f:'IF(B'+(last+1)+'="","",IF(B'+(last+1)+'=100,"100 맞아요","합계를 100으로 맞춰요"))'}],
-             ["별표 세 개 넘기면 돌아오는 시간",{t:"n",f:'IF(SUMIF(G5:G'+last+',"★*",B5:B'+last+')=0,"",SUMIF(G5:G'+last+',"★*",B5:B'+last+'))'}]]);
+             ["TOP3 합계",{t:"n",f:'IF(SUMIF(G5:G'+last+',"★*",B5:B'+last+')=0,"",SUMIF(G5:G'+last+',"★*",B5:B'+last+'))'}]]);
   var s2=XLSX.utils.aoa_to_sheet(a2); s2["!cols"]=[{wch:40},{wch:14},{wch:12},{wch:12},{wch:14},{wch:24},{wch:9}];
   var s3=XLSX.utils.aoa_to_sheet([["칸 읽는 법"],[],["칸","읽는 법"]].concat(GUIDE)); s3["!cols"]=[{wch:24},{wch:90}];
   XLSX.utils.book_append_sheet(wb,s1,"1장 하루 적기"); XLSX.utils.book_append_sheet(wb,s2,"2장 TOP3 고르기"); XLSX.utils.book_append_sheet(wb,s3,"칸 읽는 법");
-  T.download(wb,"내 업무 우선순위 TOP3 표.xlsx"); T.toast("엑셀 파일로 저장했어요");
+  T.download(wb,"내 업무 자동화 우선순위 TOP3 표.xlsx"); T.toast("엑셀 파일로 저장했어요");
 });
 /* 불러오기: 이 페이지에서 저장한 파일, 또는 빈 양식 엑셀에 적은 파일 */
 function parseDay(r){
