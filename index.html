@@ -286,8 +286,8 @@ details[open] summary{margin-bottom:8px}
       <div class="five" aria-label="다섯 가지">
         <div><b>진행 배경</b><span>왜 하는지</span></div>
         <div><b>성공적인 결과</b><span>끝났을 때 모습과 숫자</span></div>
-        <div><b>참고 자료</b><span>내가 골라서 주기</span></div>
         <div><b>업무 프로세스</b><span>어떤 순서로, 중간엔 언제</span></div>
+        <div><b>참고 자료</b><span>내가 골라서 주기</span></div>
         <div><b>데드라인</b><span>언제까지</span></div>
       </div>
     </div>
@@ -464,14 +464,14 @@ details[open] summary{margin-bottom:8px}
   var FIVE=[
     {k:"bg",n:"진행 배경",d:"왜 하는지",ex:"신제품을 냈는데 아직 아는 사람이 적어서, 팔로워가 많은 A님과 공구로 처음 알리고 팔아 보려고 해요."},
     {k:"result",n:"성공적인 결과",d:"끝났을 때 모습과 숫자",ex:"공구 7일 동안 500개 판매. A님 팔로워들이 신제품을 알게 되고 써 본 후기가 올라오는 모습."},
-    {k:"ref",n:"참고 자료",d:"내가 골라서 주기",ex:"지난번 공구 판매 기록, 반응 좋았던 공구 소개 글 2~3개."},
     {k:"proc",n:"업무 프로세스",d:"어떤 순서로, 중간엔 언제",ex:"제품 정보 정리 → A님께 전달 → 소개 글 준비 → 오픈 공지 → 문의 응대 → 마감 뒤 정산."},
+    {k:"ref",n:"참고 자료",d:"내가 골라서 주기",ex:"지난번 공구 판매 기록, 반응 좋았던 공구 소개 글 2~3개."},
     {k:"due",n:"데드라인",d:"언제까지",ex:"11월 10일 공구 오픈, 소개 글은 11월 5일까지."}];
   $("exFive").innerHTML=
     '<div><span class="k">진행 배경</span><span>신제품을 냈는데 아직 아는 사람이 적어서, 팔로워가 많은 A님과 공구로 처음 알리고 팔아 보려고 해요.</span></div>'+
     '<div><span class="k">성공적인 결과</span><span><b>정량</b> 공구 7일 동안 500개 판매<br><b>정성</b> A님 팔로워들이 신제품을 알게 되고 써 본 후기가 올라오는 모습</span></div>'+
-    '<div><span class="k">참고 자료</span><span>지난번 공구 판매 기록, 반응 좋았던 공구 소개 글 2~3개</span></div>'+
     '<div><span class="k">업무 프로세스</span><span>제품 정보 정리 → A님께 전달 → 소개 글 준비 → 오픈 공지 → 문의 응대 → 마감 뒤 정산</span></div>'+
+    '<div><span class="k">참고 자료</span><span>지난번 공구 판매 기록, 반응 좋았던 공구 소개 글 2~3개</span></div>'+
     '<div><span class="k">데드라인</span><span>11월 10일 공구 오픈, 소개 글은 11월 5일까지</span></div>';
   function seg(label,val){return '<div class="seg" role="group" aria-label="'+esc(label)+'"><button type="button" data-v="have" aria-pressed="'+(val==="have")+'">있음</button><button type="button" data-v="miss" aria-pressed="'+(val==="miss")+'">없음</button></div>';}
   function renderMarks(){$("markRows").innerHTML=FIVE.map(function(x){return '<div data-k="'+x.k+'"><span class="k">'+x.n+'<small>'+x.d+'</small></span>'+seg(x.n,S.check.mark[x.k])+'</div>';}).join("");}
