@@ -41,6 +41,9 @@ a{color:var(--accent-ink);font-weight:700}
 .sub{color:var(--sub)}
 .hint{font-size:14.5px;color:var(--sub)}
 .top{display:grid;gap:8px}
+.guidebox{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 14px;border-top:1px solid var(--line)}
+.guidebox summary{font-size:14.5px}
+.guidebox ol{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14.5px;color:var(--sub)}
 
 /* 탭 */
 .tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-4px;padding-inline:4px}
@@ -147,7 +150,14 @@ details[open] summary{margin-bottom:8px}
   <header class="top">
     <p class="eyebrow">패스트캠퍼스 · 강의 자료실</p>
     <h1>클로드 AI 비서 3명으로 모든 업무 끝!<br>24시간 돌아가는 에이스팀</h1>
-    <p class="sub">탭에서 자료를 골라 바로 적어요. 따로 저장 버튼을 누르지 않아도, 적는 대로 이 인터넷 창에 저장돼요. 창을 닫았다 다시 열어도 그대로 있어요.</p>
+    <details class="guidebox" id="howto" open>
+      <summary>자료실 이용 안내</summary>
+      <ol>
+        <li>파트가 열릴 때마다 그 파트 자료가 이 한 곳에 탭으로 늘어나요.</li>
+        <li>적은 내용은 지금 쓰는 이 인터넷 창에 자동 저장돼요. 다른 기기나 시크릿 창에서는 안 보여요. 옮기려면 탭 맨 아래 복사 단추(「메모장용으로 복사」, 지시 점검표는 「지시서 복사」)를 눌러 메모장에 붙여 두세요.</li>
+        <li>쓰는 법: 위 탭에서 자료를 고르고, 칸에 적으면 끝이에요.</li>
+      </ol>
+    </details>
   </header>
 
   <div class="tabbar">
@@ -180,7 +190,7 @@ details[open] summary{margin-bottom:8px}
     <div class="panel-head"><h2>AI 업무 시스템 진단</h2><p class="sub">다섯 영역 25칸을 체크하면 우리 회사 등급이 나와요. 진단은 새 창에서 열려요.</p></div>
     <div class="card">
       <div class="btns"><a class="btn" href="https://jysblanc-rgb.github.io/ai-work-diagnosis/" target="_blank" rel="noopener">진단 도구 열기</a></div>
-      <p class="hint">결과가 나오면 가장 낮은 등급, 그 영역, 먼저 다질 칸을 「파트 1 진단 한 장」 탭 첫 줄에 적어 두세요.</p>
+      <p class="hint">결과가 나오면 가장 낮은 등급, 그 영역, 먼저 잡을 것을 「파트 1 진단 한 장」 탭 첫 줄에 적어 두세요.</p>
     </div>
   </section>
 
@@ -318,7 +328,7 @@ details[open] summary{margin-bottom:8px}
     <div class="card ex">
       <div class="card-head"><span class="step">예</span><h3>베스트 예시 · 유아용품 브랜드 대표님</h3><span class="tag">3명이 일하는 회사</span></div>
       <div class="kv">
-        <div><span class="k">AI 업무 시스템 진단<small>가장 낮은 등급 · 영역 · 먼저 다질 칸</small></span><span>F · 목표 · 기초 1 「올해 가장 중요하게 만들 결과 한 줄」</span></div>
+        <div><span class="k">AI 업무 시스템 진단<small>가장 낮은 등급 · 영역 · 먼저 잡을 것</small></span><span>F · 목표 · 기초 1 「올해 가장 중요하게 만들 결과 한 줄」</span></div>
         <div><span class="k">우선순위 TOP3<small>★1 · ★2 · ★3</small></span><span>★1 고객 문의 답장 · ★2 마케팅 디자인 · ★3 인스타·릴스 마케팅</span></div>
         <div><span class="k">지시 점검표<small>내 한마디 · 빠진 것</small></span><span>「공구 진행 기록 정리해 둬」 · 5 / 5</span></div>
         <div><span class="k">한 줄 카드<small>어디서 멈추나 · 다음엔</small></span><span>세 번째 · 잘 나온 고객 답장을 스킬로 남기는 것부터</span></div>
@@ -329,7 +339,7 @@ details[open] summary{margin-bottom:8px}
     <div class="card">
       <div class="card-head"><span class="step">1</span><h3>내 진단 한 장</h3></div>
       <div class="kv">
-        <div><span class="k">AI 업무 시스템 진단<small>가장 낮은 등급 · 영역 · 먼저 다질 칸</small></span><div class="f"><input type="text" id="s_diag" data-bind="sheet.diag" aria-label="진단 결과" placeholder="진단 도구 결과 화면에서 옮겨 적어요"></div></div>
+        <div><span class="k">AI 업무 시스템 진단<small>가장 낮은 등급 · 영역 · 먼저 잡을 것</small></span><div class="f"><input type="text" id="s_diag" data-bind="sheet.diag" aria-label="진단 결과" placeholder="진단 도구 결과 화면에서 옮겨 적어요"></div></div>
         <div><span class="k">우선순위 TOP3<small>TOP3 표에서 자동</small></span><span id="s_top"></span></div>
         <div><span class="k">지시 점검표<small>지시 점검표에서 자동</small></span><span id="s_check"></span></div>
         <div><span class="k">한 줄 카드<small>한 줄 카드에서 자동</small></span><span id="s_card"></span></div>
@@ -338,7 +348,7 @@ details[open] summary{margin-bottom:8px}
 
     <div class="card">
       <div class="card-head"><span class="step">2</span><h3>한눈에 보이는 빈 곳 한 줄</h3></div>
-      <p class="hint">진단의 먼저 다질 칸과, 지시 점검표에서 빠진 칸을 이어서 한 줄로 적어요.</p>
+      <p class="hint">진단의 먼저 잡을 것과, 지시 점검표에서 빠진 칸을 이어서 한 줄로 적어요.</p>
       <div class="f"><input type="text" id="s_gap" data-bind="sheet.gap" aria-label="한눈에 보이는 빈 곳"></div>
       <div class="btns"><button class="btn alt small" type="button" data-copy="sheet">메모장용으로 복사 (선택)</button><span class="done" data-done="sheet" hidden>복사했어요</span></div>
     </div>
@@ -505,6 +515,10 @@ details[open] summary{margin-bottom:8px}
     var ok=function(){d.hidden=false;setTimeout(function(){d.hidden=true;},1800);};
     try{navigator.clipboard.writeText(text).then(ok,function(){fallback(text);ok();});}catch(e){fallback(text);ok();}
   });});
+
+  /* ---------- 이용 안내 접힘 기억 ---------- */
+  try{if(localStorage.getItem(KEY+"-howto")==="closed")$("howto").open=false;}catch(e){}
+  $("howto").addEventListener("toggle",function(){try{localStorage.setItem(KEY+"-howto",$("howto").open?"open":"closed");}catch(e){}});
 
   /* ---------- 처음 그리기 ---------- */
   renderDayList("day");renderDayList("week");renderTop();renderStops();renderCard();renderMarks();renderFill();renderScore();
