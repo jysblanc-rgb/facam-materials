@@ -2,76 +2,514 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
 <title>패캠 강의 자료실</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;800&display=swap">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
 <style>
-body{background:#f2f3ef;color:#1a1a1a;font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;font-weight:500;line-height:1.6;margin:0;-webkit-text-size-adjust:100%;word-break:keep-all;overflow-wrap:anywhere}
+/* 레이아웃: 강의 제목 → 자료 이름 탭(위에 붙음) → 탭 하나 = 자료 하나. 자료마다 베스트 예시 → 내 것 적기 → 내 답 복사. 맨 아래 작은 상담 한 줄 */
+:root{
+  --bg:#f2f3ef; --paper:#ffffff; --ink:#1a1a1a; --sub:#50564c; --faint:#7b8277; --line:#d3d7cd; --line-strong:#a9afa3;
+  --accent:#0f5c48; --accent-soft:#e1efe9; --accent-ink:#0b4a39;
+  --miss:#b4471f; --miss-soft:#fbeae2; --have:#1f6e3c; --have-soft:#e3f2e7;
+  --ex:#f7f6ee; --bubble:#fff4c7;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131713; --paper:#1c211d; --ink:#eef0ea; --sub:#b8beb3; --faint:#8b9287; --line:#343c34; --line-strong:#56604f;
+  --accent:#5fc3a0; --accent-soft:#1f3a31; --accent-ink:#8fe0c2;
+  --miss:#f0916b; --miss-soft:#3d241a; --have:#7fd39a; --have-soft:#1c3324;
+  --ex:#232820; --bubble:#3d3720; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131713; --paper:#1c211d; --ink:#eef0ea; --sub:#b8beb3; --faint:#8b9287; --line:#343c34; --line-strong:#56604f;
+  --accent:#5fc3a0; --accent-soft:#1f3a31; --accent-ink:#8fe0c2;
+  --miss:#f0916b; --miss-soft:#3d241a; --have:#7fd39a; --have-soft:#1c3324;
+  --ex:#232820; --bubble:#3d3720; color-scheme:dark}
 *{box-sizing:border-box}
-:root{--accent:#0f5c48;--line:#9aa095}
-.wrap{max-width:760px;margin:0 auto;padding:24px 16px 56px;display:grid;gap:18px}
-h1{font-weight:800;font-size:clamp(26px,6vw,34px);line-height:1.25;margin:0;letter-spacing:-.02em}
-h2{font-weight:800;font-size:21px;margin:0 0 4px}
-.sub{font-weight:500;color:#2e2e2e;margin:6px 0 0}
-a{color:#0b4a39;font-weight:700}
-.card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;font-weight:500;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 40px;display:grid;gap:18px}
+h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(22px,5vw,30px);font-weight:800;line-height:1.3}
+h2{font-size:clamp(22px,4.6vw,27px);font-weight:800;line-height:1.3}
+h3{font-size:18px;font-weight:800}
+p{margin:0}
+a{color:var(--accent-ink);font-weight:700}
+.eyebrow{font-size:13.5px;font-weight:700;color:var(--accent-ink);letter-spacing:.04em}
+.sub{color:var(--sub)}
+.hint{font-size:14.5px;color:var(--sub)}
+.top{display:grid;gap:8px}
 
-.item{display:block;text-decoration:none;color:inherit}
-.code{display:inline-block;background:#e1efe9;color:#0b4a39;font-weight:800;border-radius:999px;padding:2px 12px;font-size:15px}
-.item b{display:block;font-size:19px;margin:8px 0 2px}
-.item span.d{display:block;color:#2e2e2e}
-.go{display:inline-block;margin-top:8px;background:#0f5c48;color:#fff;font-weight:700;border-radius:999px;padding:8px 16px;min-height:44px;line-height:28px}
-.go.alt{background:#fff;color:#0b4a39;border:2px solid #0f5c48;line-height:24px}
-.row{display:flex;flex-wrap:wrap;gap:10px}
+/* 탭 */
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-4px;padding-inline:4px}
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:2px solid var(--ink);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;font:inherit;font-size:15px;font-weight:700;color:var(--sub);background:transparent;border:0;border-bottom:4px solid transparent;padding:10px 10px 7px;min-height:48px;cursor:pointer;white-space:nowrap;text-align:left}
+.tabs button .no{display:block;font-size:11.5px;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums}
+.tabs button[aria-selected=true]{color:var(--accent-ink);border-bottom-color:var(--accent)}
+.tabs button[aria-selected=true] .no{color:var(--accent-ink)}
+.saved{font-size:13px;font-weight:700;color:var(--have);padding:6px 2px;text-align:right}
+.saved::before{content:"● ";}
+.saved.off{color:var(--miss)}
+
+/* 탭 화면 */
+.panel{display:grid;gap:16px}
+.panel[hidden]{display:none}
+.wrap > *,.panel > *,.card > *{min-width:0}
+.panel-head{display:grid;gap:4px;padding-top:4px}
+.todo{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.todo span{font-size:13.5px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:3px 11px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 16px;display:grid;gap:12px;min-width:0}
+.card.ex{background:var(--ex);border-style:dashed;border-color:var(--line-strong)}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.step{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--paper);font-size:14px;font-weight:800}
+.card.ex .step{background:var(--ink)}
+.tag{font-size:12.5px;font-weight:700;color:var(--faint);margin-left:auto}
+
+/* 개념 */
+.why{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.why li{padding-left:14px;border-left:3px solid var(--accent-soft)}
+.five{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.five div{background:var(--accent-soft);border-radius:10px;padding:9px 6px;text-align:center;display:grid;gap:2px}
+.five b{font-size:15px;color:var(--accent-ink)}
+.five span{font-size:12.5px;color:var(--sub);line-height:1.4}
+@media (max-width:600px){.five{grid-template-columns:1fr 1fr}.five div:last-child{grid-column:1/3}}
+
+/* 줄(라벨 + 값) */
+.bubble{background:var(--bubble);border-radius:14px 14px 14px 4px;padding:10px 14px;font-weight:700;font-size:17px;justify-self:start;max-width:100%}
+.kv{display:grid;border-top:1px solid var(--line)}
+.kv > div{display:grid;grid-template-columns:120px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.kv .k{font-weight:800;color:var(--accent-ink);font-size:15px}
+.kv .k small{display:block;font-weight:500;color:var(--sub);font-size:12.5px;line-height:1.4}
+@media (max-width:520px){.kv > div{grid-template-columns:1fr;gap:4px}}
+.kv .is-miss{background:var(--miss-soft);margin-inline:-16px;padding-inline:16px}
+
+/* 표 (예시 보기용) */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+th{font-size:12.5px;color:var(--sub);font-weight:700}
+td.num{font-variant-numeric:tabular-nums;text-align:right}
+.star{font-weight:800;color:var(--accent-ink)}
+
+/* 입력 */
+label,.lbl{font-weight:700;font-size:14px}
+input[type=text],input[type=number],select,textarea{width:100%;font:inherit;font-size:15.5px;font-weight:500;color:var(--ink);background:var(--bg);border:1px solid var(--line-strong);border-radius:9px;padding:8px 10px;min-height:42px}
+textarea{min-height:64px;resize:vertical;line-height:1.55}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.f{display:grid;gap:4px;min-width:0}
+.f .lbl{font-size:12.5px;color:var(--sub);font-weight:700}
+
+.items{display:grid;gap:10px}
+.item{border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:8px;background:var(--paper)}
+.item.on{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+.g-day{display:grid;grid-template-columns:90px 1fr 110px 120px;gap:8px}
+.g-top{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media (max-width:600px){.g-day{grid-template-columns:1fr 1fr}.g-day .wide{grid-column:1/3;order:-1}.g-top{grid-template-columns:1fr 1fr}}
+.sums{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;font-weight:700}
+.sums b{font-size:22px;font-variant-numeric:tabular-nums}
+.ok{color:var(--have)} .warn{color:var(--miss)}
+
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:14.5px;font-weight:700;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--sub);padding:6px 14px;min-height:40px;cursor:pointer}
+.seg button[aria-pressed=true][data-v=have]{background:var(--have-soft);border-color:var(--have);color:var(--have)}
+.seg button[aria-pressed=true][data-v=miss]{background:var(--miss-soft);border-color:var(--miss);color:var(--miss)}
+.pick{display:grid;gap:8px}
+.pick button{font:inherit;text-align:left;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--ink);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;gap:2px}
+.pick button b{font-size:15.5px}
+.pick button span{font-size:13.5px;color:var(--sub)}
+.pick button[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft)}
+.score{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-weight:700}
+.score b{font-size:22px;font-variant-numeric:tabular-nums}
+.ex-line{font-size:13px;color:var(--sub)}
+.ex-line b{color:var(--accent-ink)}
+
+.doc{background:var(--bg);border:1px dashed var(--accent);border-radius:12px;padding:12px 14px;white-space:pre-wrap;font-size:15.5px;line-height:1.7}
+.btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:15px;border-radius:999px;padding:9px 18px;min-height:44px;cursor:pointer;border:2px solid var(--accent);background:var(--accent);color:var(--paper);text-decoration:none;display:inline-flex;align-items:center}
+.btn.alt{background:var(--paper);color:var(--accent-ink)}
+.btn.small{font-size:14px;padding:6px 14px;min-height:38px}
+.done{font-size:14px;color:var(--have);font-weight:700}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;color:var(--accent-ink);min-height:32px}
+details[open] summary{margin-bottom:8px}
+.guide{display:grid;gap:8px;margin:0;padding:0;list-style:none;font-size:14.5px}
+.guide b{display:block}
+
+.foot{border-top:1px solid var(--line);padding-top:14px;font-size:14px;color:var(--sub);display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head>
-<body>
-<main class="wrap">
-<header>
-<h1>패캠 강의 자료실</h1>
-<p class="sub">강의 클립에서 「그대로 드릴게요」라고 한 자료를 클립 번호별로 모았어요.</p>
-</header>
 
-<section class="card">
-<span class="code">00-03-02</span>
-<h2>사전 준비물</h2>
-<p class="sub">세 칸 준비물 목록 한 장이에요. 인쇄해서 체크해도 돼요.</p>
-<div class="row"><a class="go" href="prep/">준비물 목록 열기</a></div>
-</section>
+<div class="wrap">
 
-<section class="card">
-<span class="code">01-01-02</span>
-<h2>AI 업무 시스템 진단</h2>
-<p class="sub">다섯 영역 25칸을 체크하면 우리 회사 등급이 나와요.</p>
-<div class="row"><a class="go" href="https://jysblanc-rgb.github.io/ai-work-diagnosis/">진단 도구 열기</a></div>
-</section>
-<section class="card">
-<span class="code">01-02-02</span>
-<h2>내 업무 자동화 우선순위 TOP3 표</h2>
-<p class="sub">하루를 적고 시간으로 재서 먼저 넘길 일 세 개를 고르는 양식이에요. 화면에서 바로 적고, 엑셀 파일로 저장할 수 있어요.</p>
-<div class="row">
-<a class="go" href="01-02-02/">양식 열고 바로 적기</a>
+  <header class="top">
+    <p class="eyebrow">패스트캠퍼스 · 강의 자료실</p>
+    <h1>클로드 AI 비서 3명으로 모든 업무 끝!<br>24시간 돌아가는 에이스팀</h1>
+    <p class="sub">탭에서 자료를 골라 바로 적어요. 따로 저장 버튼을 누르지 않아도, 적는 대로 이 인터넷 창에 저장돼요. 창을 닫았다 다시 열어도 그대로 있어요.</p>
+  </header>
+
+  <div class="tabbar">
+    <nav class="tabs" role="tablist" aria-label="자료 고르기">
+      <button role="tab" id="t-prep" aria-controls="prep"><span class="no">시작 전</span>사전 준비물 목록</button>
+      <button role="tab" id="t-diag" aria-controls="diag"><span class="no">01-01-02</span>AI 업무 시스템 진단</button>
+      <button role="tab" id="t-top3" aria-controls="top3"><span class="no">01-02-02</span>내 업무 자동화 우선순위 TOP3 표</button>
+      <button role="tab" id="t-card" aria-controls="card"><span class="no">01-03-01</span>한 줄 카드</button>
+      <button role="tab" id="t-check" aria-controls="check"><span class="no">01-03-02</span>지시 점검표</button>
+      <button role="tab" id="t-sheet" aria-controls="sheet"><span class="no">01-03-02</span>파트 1 진단 한 장</button>
+    </nav>
+    <p class="saved" id="saved" aria-live="polite">적는 대로 자동 저장돼요</p>
+  </div>
+
+  <!-- ============ 준비물 ============ -->
+  <section class="panel" role="tabpanel" id="prep" aria-labelledby="t-prep" hidden>
+    <div class="panel-head"><h2>사전 준비물 목록</h2><p class="sub">이 강의 때문에 꼭 마련해야 하는 것만 모았어요.</p></div>
+    <div class="card">
+      <ul style="margin:0;padding-left:20px;display:grid;gap:6px">
+        <li>메모리 16GB 이상인 컴퓨터</li>
+        <li>클로드 유료 요금제 Max 5배 <span class="hint">(가입은 파트 2 첫 클립에서 같이 해요)</span></li>
+        <li>구글 계정, 노션 계정</li>
+      </ul>
+      <p class="hint">24시간 켜 둘 컴퓨터는 파트 9에서 비서를 밤새 돌리고 싶은 분만 챙기시면 돼요.</p>
+    </div>
+  </section>
+
+  <!-- ============ 진단 ============ -->
+  <section class="panel" role="tabpanel" id="diag" aria-labelledby="t-diag" hidden>
+    <div class="panel-head"><h2>AI 업무 시스템 진단</h2><p class="sub">다섯 영역 25칸을 체크하면 우리 회사 등급이 나와요. 진단은 새 창에서 열려요.</p></div>
+    <div class="card">
+      <div class="btns"><a class="btn" href="https://jysblanc-rgb.github.io/ai-work-diagnosis/" target="_blank" rel="noopener">진단 도구 열기</a></div>
+      <p class="hint">결과가 나오면 가장 낮은 등급, 그 영역, 먼저 다질 칸을 「파트 1 진단 한 장」 탭 첫 줄에 적어 두세요.</p>
+    </div>
+  </section>
+
+  <!-- ============ TOP3 ============ -->
+  <section class="panel" role="tabpanel" id="top3" aria-labelledby="t-top3" hidden>
+    <div class="panel-head">
+      <h2>내 업무 자동화 우선순위 TOP3 표</h2>
+      <p class="sub">하루를 적고, 시간으로 재서, 먼저 넘길 일 세 개를 골라요.</p>
+      <div class="todo"><span>베스트 예시 보기</span><span>1 하루 적기</span><span>2 TOP3 고르기</span></div>
+    </div>
+
+    <div class="card ex">
+      <div class="card-head"><span class="step">예</span><h3>베스트 예시 · 마케팅팀 4년 차 직장인</h3><span class="tag">지어낸 예시예요</span></div>
+      <p class="lbl">1 하루 적기</p>
+      <div class="tbl"><table id="exDay"></table></div>
+      <p class="lbl">2 TOP3 고르기</p>
+      <div class="tbl"><table id="exTop"></table></div>
+      <p class="hint" id="exSo"></p>
+      <details><summary>온라인몰 대표님 예시도 보기</summary><div class="tbl"><table id="exTop2"></table></div><p class="hint" id="exSo2"></p></details>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">1</span><h3>내 하루 적기</h3></div>
+      <p class="hint">아침에 일을 시작해서 끝낼 때까지 한 일을 시간 순서대로요. 시간은 0.5 · 1 · 2시간처럼 크게만 적어요.</p>
+      <div class="items" id="dayRows"></div>
+      <div class="btns"><button class="btn alt small" type="button" data-add="day">줄 더하기</button></div>
+      <p class="lbl" style="margin-top:6px">매주 · 매달 한 번씩 하는 일 (정산 · 보고서 · 광고 점검)</p>
+      <div class="items" id="weekRows"></div>
+      <div class="btns"><button class="btn alt small" type="button" data-add="week">줄 더하기</button></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">2</span><h3>TOP3 고르기</h3></div>
+      <p class="hint">1에 적은 일을 「하는 일」에 옮겨요. 같은 일은 한 줄로 모아요. 별표는 「TOP3 ★」 칸에서 ★1 · ★2 · ★3을 골라요.</p>
+      <div class="items" id="topRows"></div>
+      <div class="btns"><button class="btn alt small" type="button" data-add="top">줄 더하기</button></div>
+      <div class="sums" id="topSums"></div>
+      <details><summary>칸 읽는 법 · 별표 치는 순서</summary><ul class="guide" id="guide"></ul></details>
+      <div class="btns"><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 한 줄 카드 ============ -->
+  <section class="panel" role="tabpanel" id="card" aria-labelledby="t-card" hidden>
+    <div class="panel-head">
+      <h2>한 줄 카드</h2>
+      <p class="sub">맡기다 접었던 일 하나를 떠올려, 어디서 멈췄는지 한 줄로 적어요.</p>
+      <div class="todo"><span>베스트 예시 보기</span><span>1 칸 채우기</span><span>2 한 줄 완성</span></div>
+    </div>
+
+    <div class="card ex">
+      <div class="card-head"><span class="step">예</span><h3>베스트 예시 · 마케팅팀 직장인</h3><span class="tag">지어낸 예시예요</span></div>
+      <div class="kv">
+        <div><span class="k">맡기다 접은 일</span><span>회의록 정리를 AI에게 맡기기</span></div>
+        <div><span class="k">그때 무슨 일이</span><span>처음 두세 번 우리 팀 양식에 맞게 고쳐 주다가 매번 고칠 거면 내가 쓰는 게 빠르겠다 싶어 다시 직접 썼어요</span></div>
+        <div><span class="k">어디서 멈췄나</span><span>첫 번째 한 번 세팅이면 끝이라 생각하기</span></div>
+        <div><span class="k">다음엔 이것부터</span><span>고칠 때마다 「이거 매뉴얼에 반영해 줘」까지 말해요</span></div>
+      </div>
+      <p class="bubble">「나는 회의록 정리를 맡기다 첫 번째 공통점에서 멈추는 사람이다. 다음엔 고칠 때마다 반영해 달라고 말하는 것부터.」</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">1</span><h3>내 카드 채우기</h3></div>
+      <div class="f"><label for="c_job">맡기다 접은 일</label><input type="text" id="c_job" data-bind="card.job" placeholder="AI든 사람이든, 맡기다 접었던 일 하나"></div>
+      <div class="f"><label for="c_what">그때 무슨 일이 있었나 (한 줄)</label><input type="text" id="c_what" data-bind="card.what"></div>
+      <div class="f"><span class="lbl" style="font-size:14px;color:var(--ink)">나는 어디서 멈췄나</span><div class="pick" id="stopPick"></div></div>
+      <div class="f"><label for="c_next">다음엔 이것부터</label><input type="text" id="c_next" data-bind="card.next"></div>
+      <p class="hint">아직 맡겨 본 적이 없으시면, 결제나 설치만 해 두고 손 놓은 일을 적으셔도 돼요.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">2</span><h3>한 줄로 완성</h3></div>
+      <div class="doc" id="cardLine"></div>
+      <div class="btns"><button class="btn alt small" type="button" data-copy="card">메모장용으로 복사 (선택)</button><span class="done" data-done="card" hidden>복사했어요</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 지시 점검표 ============ -->
+  <section class="panel" role="tabpanel" id="check" aria-labelledby="t-check">
+    <div class="panel-head">
+      <h2>지시 점검표</h2>
+      <p class="sub">한마디에 빠진 다섯 가지를 찾아 채워, 내 업무 지시서 한 장을 만들어요.</p>
+      <div class="todo"><span>베스트 예시 보기</span><span>1 내 한마디 점검</span><span>2 지시서 완성</span></div>
+    </div>
+
+    <div class="card">
+      <h3>한마디에 빠진 다섯 가지</h3>
+      <ul class="why">
+        <li><b>직원도 다 알아들은 게 아니었어요.</b> 「이해하셨어요?」 하면 다 이해했다고 하고, 일을 하다 막히면 그제서야 와서 물어요.</li>
+        <li><b>AI는 우리 일하는 방식을 아직 모르는 신입이에요.</b> 짐작할 거리 자체가 없어요.</li>
+        <li><b>그래서 처음에 싱크를 맞춰요.</b> 처음에 맞추면 결과물이 좋고, 안 맞추면 중간에 「어, 아닌데?」 하고 다시 하게 돼요.</li>
+      </ul>
+      <div class="five" aria-label="다섯 가지">
+        <div><b>진행 배경</b><span>왜 하는지</span></div>
+        <div><b>성공적인 결과</b><span>끝났을 때 모습과 숫자</span></div>
+        <div><b>참고 자료</b><span>내가 골라서 주기</span></div>
+        <div><b>업무 프로세스</b><span>어떤 순서로, 중간엔 언제</span></div>
+        <div><b>데드라인</b><span>언제까지</span></div>
+      </div>
+    </div>
+
+    <div class="card ex">
+      <div class="card-head"><span class="step">예</span><h3>베스트 예시 · 공동구매 맡기기</h3><span class="tag">숫자·날짜는 예시예요</span></div>
+      <p class="bubble">「이번 공구 하나 진행해 줘」</p>
+      <p class="hint">이 한마디를 다섯 가지로 채우면 이렇게 돼요.</p>
+      <div class="kv" id="exFive"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">1</span><h3>내 한마디에는 다섯 가지 중 몇 개가 있나요</h3></div>
+      <div class="f"><label for="ck_line">내가 평소 일 시키는 말 한 줄</label><input type="text" id="ck_line" data-bind="check.line" placeholder="예: 이번 달 매출 정리 좀 해 줘"></div>
+      <p class="hint">평소에 하던 말 그대로 적어요. 듣는 사람이 짐작해야 알 수 있는 건 「없음」이에요.</p>
+      <div class="kv" id="markRows"></div>
+      <p class="score">빠진 것 <b id="missCount">- / 5</b><span class="hint" id="missNames"></span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">2</span><h3>빠진 칸을 채워 내 업무 지시서 한 장 만들기</h3></div>
+      <p class="hint">빨간 칸이 빠진 것이에요. 칸 아래 베스트 예시를 보며 한 줄씩 채워요. 있던 칸은 내 말에서 옮겨 적어요.</p>
+      <div class="kv" id="fillRows"></div>
+      <h3>완성된 내 업무 지시서</h3>
+      <div class="doc" id="checkDoc" aria-live="polite"></div>
+      <div class="btns"><button class="btn" type="button" data-copy="check">지시서 복사</button><span class="done" data-done="check" hidden>복사했어요</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 파트 1 진단 한 장 ============ -->
+  <section class="panel" role="tabpanel" id="sheet" aria-labelledby="t-sheet" hidden>
+    <div class="panel-head">
+      <h2>파트 1 진단 한 장</h2>
+      <p class="sub">파트 1에서 적은 것을 한 장에 모아, 우리 회사의 빈 곳을 봐요. 이 자료실에서 적은 칸은 자동으로 채워져요.</p>
+      <div class="todo"><span>베스트 예시 보기</span><span>1 빈칸 채우기</span><span>2 빈 곳 한 줄</span></div>
+    </div>
+
+    <div class="card ex">
+      <div class="card-head"><span class="step">예</span><h3>베스트 예시 · 유아용품 브랜드 대표님</h3><span class="tag">3명이 일하는 회사</span></div>
+      <div class="kv">
+        <div><span class="k">AI 업무 시스템 진단<small>가장 낮은 등급 · 영역 · 먼저 다질 칸</small></span><span>F · 목표 · 기초 1 「올해 가장 중요하게 만들 결과 한 줄」</span></div>
+        <div><span class="k">우선순위 TOP3<small>★1 · ★2 · ★3</small></span><span>★1 고객 문의 답장 · ★2 마케팅 디자인 · ★3 인스타·릴스 마케팅</span></div>
+        <div><span class="k">지시 점검표<small>내 한마디 · 빠진 것</small></span><span>「공구 진행 기록 정리해 둬」 · 5 / 5</span></div>
+        <div><span class="k">한 줄 카드<small>어디서 멈추나 · 다음엔</small></span><span>세 번째 · 잘 나온 고객 답장을 스킬로 남기는 것부터</span></div>
+        <div><span class="k">한눈에 보이는 빈 곳</span><span>올해 목표 한 줄이 없고, 맡기는 말에 진행 배경이 빠져 있어요. 그래서 기록을 해도 안 쓰게 돼요.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">1</span><h3>내 진단 한 장</h3></div>
+      <div class="kv">
+        <div><span class="k">AI 업무 시스템 진단<small>가장 낮은 등급 · 영역 · 먼저 다질 칸</small></span><div class="f"><input type="text" id="s_diag" data-bind="sheet.diag" aria-label="진단 결과" placeholder="진단 도구 결과 화면에서 옮겨 적어요"></div></div>
+        <div><span class="k">우선순위 TOP3<small>TOP3 표에서 자동</small></span><span id="s_top"></span></div>
+        <div><span class="k">지시 점검표<small>지시 점검표에서 자동</small></span><span id="s_check"></span></div>
+        <div><span class="k">한 줄 카드<small>한 줄 카드에서 자동</small></span><span id="s_card"></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">2</span><h3>한눈에 보이는 빈 곳 한 줄</h3></div>
+      <p class="hint">진단의 먼저 다질 칸과, 지시 점검표에서 빠진 칸을 이어서 한 줄로 적어요.</p>
+      <div class="f"><input type="text" id="s_gap" data-bind="sheet.gap" aria-label="한눈에 보이는 빈 곳"></div>
+      <div class="btns"><button class="btn alt small" type="button" data-copy="sheet">메모장용으로 복사 (선택)</button><span class="done" data-done="sheet" hidden>복사했어요</span></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>만든 곳 · 심플키</span>
+    <a href="https://litt.ly/simplekey">파트 1 진단 결과를 들고 고민 상담하기</a>
+  </footer>
 </div>
-</section>
-<section class="card">
-<span class="code">01-03-01</span>
-<h2>내가 멈추는 지점, 한 줄 카드</h2>
-<p class="sub">맡기다 접었던 일 하나와, 세 가지 공통점 중 어디서 멈췄는지를 한 줄로 적는 카드예요. 한 줄 문형만 채우면 되고, 칸으로 정리하고 싶을 때만 엑셀 카드를 써요.</p>
-<div class="row"><a class="go" href="01-03-01/">한 줄 문형 · 예시 보기</a><a class="go alt" href="01-03-01/one-line-card-blank.xlsx" download>칸으로 정리하고 싶으면 (선택, xlsx)</a></div>
-</section>
-<section class="card">
-<span class="code">01-03-02</span>
-<h2>지시 점검표와 파트 1 진단 한 장</h2>
-<p class="sub">내 말에 빠진 다섯 가지를 표시하는 점검표와, 파트 1에서 적은 것을 모으는 진단 한 장이에요. 화면에서 바로 적고, 엑셀 파일로 저장할 수 있어요.</p>
-<div class="row"><a class="go" href="01-03-02/">양식 열고 바로 적기</a></div>
-</section>
-<section class="card">
-<span class="code">02-03-02</span>
-<h2>기기 · 상황별 도구 표</h2>
-<p class="sub">회의 녹음을 글로 바꿀 때, 내 기기와 상황에 맞는 도구를 찾는 표예요.</p>
-<div class="row"><a class="go" href="02-03-02/">표 열기</a></div>
-</section>
-</main>
-</body>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+  /* ---------- 저장 ---------- */
+  var KEY="facam-materials-onepage-v1";
+  function blank(n,w){var a=[];for(var i=0;i<n;i++){var r=[];for(var j=0;j<w;j++)r.push("");a.push(r);}return a;}
+  var S={day:blank(6,4),week:blank(2,4),top:blank(7,7),card:{},check:{line:"",mark:{},fill:{}},sheet:{}};
+  var canSave=true;
+  try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var p in o)S[p]=o[p];}localStorage.setItem(KEY+"-t","1");}catch(e){canSave=false;}
+  function hhmm(){var d=new Date();return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}
+  function save(){var el=$("saved");
+    try{localStorage.setItem(KEY,JSON.stringify(S));el.className="saved";el.textContent="자동 저장됨 · "+hhmm();}
+    catch(e){el.className="saved off";el.textContent="이 창에서는 저장이 안 돼요. 시크릿 창이면 일반 창으로 열어 주세요";}}
+  if(!canSave){$("saved").className="saved off";$("saved").textContent="이 창에서는 저장이 안 돼요. 시크릿 창이면 일반 창으로 열어 주세요";}
+  function getPath(path){var a=path.split("."),o=S;for(var i=0;i<a.length;i++){if(o==null)return "";o=o[a[i]];}return o==null?"":o;}
+  function setPath(path,v){var a=path.split("."),o=S;for(var i=0;i<a.length-1;i++){if(o[a[i]]==null)o[a[i]]={};o=o[a[i]];}o[a[a.length-1]]=v;}
+
+  /* ---------- 탭 ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function openTab(id){
+    if(!tabs.some(function(t){return t.getAttribute("aria-controls")===id;}))id="check";
+    tabs.forEach(function(t){var on=t.getAttribute("aria-controls")===id;t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;$(t.getAttribute("aria-controls")).hidden=!on;
+      if(on){var bar=t.parentNode;bar.scrollLeft+=t.getBoundingClientRect().left-bar.getBoundingClientRect().left-16;}});
+    if(id==="sheet")renderSheet();
+  }
+  tabs.forEach(function(t){t.addEventListener("click",function(){var id=t.getAttribute("aria-controls");openTab(id);try{history.replaceState(null,"","#"+id);}catch(e){}window.scrollTo(0,0);});});
+  document.querySelector(".tabs").addEventListener("keydown",function(e){
+    var i=tabs.indexOf(document.activeElement);if(i<0)return;
+    if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();var n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];n.click();n.focus();}
+  });
+  window.addEventListener("hashchange",function(){openTab((location.hash||"").slice(1));});
+
+  /* ---------- 공통 입력 ---------- */
+  function sel(opts,v,k,label){var h='<select data-k="'+k+'" aria-label="'+esc(label)+'"><option value=""></option>';opts.forEach(function(o){h+='<option'+(o===String(v)?' selected':'')+'>'+esc(o)+'</option>';});return h+'</select>';}
+  function txt(v,k,label,ph){return '<input type="text" data-k="'+k+'" aria-label="'+esc(label)+'" value="'+esc(v)+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'>';}
+  function numIn(v,k,label,step,max){return '<input type="number" inputmode="decimal" min="0" max="'+max+'" step="'+step+'" data-k="'+k+'" aria-label="'+esc(label)+'" value="'+esc(v)+'">';}
+  function fld(label,input,cls){return '<div class="f'+(cls?' '+cls:'')+'"><span class="lbl">'+label+'</span>'+input+'</div>';}
+
+  /* ---------- TOP3 ---------- */
+  var FREQD=["매일","주 1번","주 2번","주 3번","주 4번","주 5번"],FREQW=["매주","매달"];
+  var FREQ=["매일","주 2번","주 3번","주 4번","주 5번","매주","매달"],HRS=["0.5시간","1시간","2시간","2시간 이상"],LV=["1단계","2단계","3단계"],STAR=["★1","★2","★3"];
+  var GUIDE=[
+["내 시간 중 몇 %","일주일 동안 내가 일한 시간을 100으로 놓고 이 일이 얼마를 먹는지 대충 적어요. 5 · 10 단위면 충분해요."],
+["얼마나 자주","매일 · 주 몇 번 · 매주 · 매달"],
+["한 번에 몇 시간","한 번 할 때 붙잡고 있는 시간. 0.5 · 1 · 2시간처럼 적어요."],
+["얼마나 단순한가 1단계","순서표 한 장만 있으면 처음 온 사람도 똑같이 해요. (복사·붙여넣기, 클릭 반복, 정해진 답장)"],
+["얼마나 단순한가 2단계","순서표에 「이럴 땐 이렇게」 기준과 예시가 붙어야 해요. 결과를 사람이 한 번 확인해요. (가이드가 있는 디자인, 보고서 초안)"],
+["얼마나 단순한가 3단계","경험과 감이 있어야 해요. 순서표로 옮기기 어려워요. (핵심 디자인, 영업, 현장을 눈으로 보는 일, 중요한 결정)"],
+["누구에게","1단계는 AI, 2단계는 기준을 만들어 AI나 직원에게 넘기고 사람이 확인, 3단계는 내가 하고 AI는 자료 모으기 같은 준비만 해요. 직원이 없으면 AI와 나 둘로만 나눠도 돼요."],
+["별표 치는 순서","1. 3단계는 빼요. 2. 매일 하고, 하루 30분 이상 붙잡고, 1단계인 일은 %가 작아도 먼저 ★를 줘요(여러 개면 % 큰 순서). 3. 남은 것은 % 큰 순서로 ★를 이어 줘요. 4. %가 같으면 1단계 먼저, 그래도 같으면 더 자주 하는 일 먼저예요."]];
+  var EXDAY=[["9시","밤사이 온 메일 확인 · 답장","1","매일"],["10시","팀 회의","1","매일"],["11시","어제 회의 회의록 정리 · 공유","1","주 4번"],["오후","자료 조사 · 정리","1","주 2번"],["오후","다음 주 미팅 일정 조율","0.5","주 2번"],["오후","제안서 핵심 내용 기획","2","매일"],["퇴근 전","퇴근 전 메일 답장","0.5","매일"],["금요일","주간 보고서 (숫자 모으기 + 정리)","2","매주"]];
+  var EXTOP=[["메일 확인 · 답장",15,"매일","1시간","1단계","AI","★1"],["주간 보고서",15,"매주","2시간","2단계","AI 초안 + 내가 확인","★2"],["회의록 정리 · 공유",10,"주 4번","1시간","1단계","AI","★3"],["자료 조사 · 정리",5,"주 2번","1시간","2단계","AI 초안 + 내가 확인",""],["일정 조율",5,"주 2번","0.5시간","1단계","AI",""],["회의 참석",20,"매일","1시간","3단계","나",""],["제안서 · 기획 핵심",30,"매일","2시간","3단계","나",""]];
+  var EXSO="그래서 이것부터: 3단계(회의 참석, 제안서 · 기획 핵심)는 빼요. ★1 메일 확인 · 답장은 매일, 1시간, 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 주간 보고서(15), ★3 회의록 정리(10)예요. 메일 답장과 회의록은 오늘 바로 AI에게, 보고서는 양식과 기준을 붙여 초안만 AI에게. 돌아온 40을 커리어에 남는 기획 · 제안서에 써요.";
+  var EXTOP2=[["고객 문의 답장 (카톡 · 톡톡 · 게시판, 교환 접수까지)",10,"매일","0.5시간","1단계","AI","★1"],["마케팅 디자인 (배너 · 피드 · 이벤트 이미지)",20,"매주","2시간","2단계","디자이너 직원 + AI (가이드 먼저)","★2"],["상세페이지 · 제품 디자인 (새 제품 오픈)",30,"매달","2시간 이상","3단계","나",""],["인스타 · 릴스 마케팅",15,"매주","2시간","2단계","채용할지 AI와 할지 정하는 중","★3"],["사업 계획 · 성과 숫자 정리",10,"매달","2시간","3단계","나 (AI가 숫자 모으기만)",""],["외부 미팅 (광고사 · 콜라보 작가)",10,"매주","1시간","3단계","나",""],["광고 성과 확인 (광고 운영은 외주)",5,"매주","0.5시간","1단계","AI",""]];
+  var EXSO2="그래서 이것부터: 3단계(상세페이지, 사업 계획, 외부 미팅)는 빼요. ★1 고객 문의 답장은 %가 10으로 크지 않지만 매일, 0.5시간(30분), 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 마케팅 디자인(20), ★3 인스타 · 릴스 마케팅(15)이에요. 마케팅 디자인은 가이드 한 장을 먼저 만들고 넘기고, 인스타 · 릴스는 채용할지 AI와 같이 할지 먼저 정해요. 셋을 합치면 45예요.";
+  var TOPH=["하는 일","내 시간 중 몇 %","얼마나 자주","한 번에 몇 시간","얼마나 단순한가","누구에게","TOP3 ★"];
+  function exTopTable(rows){return '<thead><tr>'+TOPH.map(function(h){return '<th>'+h+'</th>';}).join("")+'</tr></thead><tbody>'+rows.map(function(r){return '<tr><td>'+esc(r[0])+'</td><td class="num">'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td><td>'+esc(r[5])+'</td><td class="star">'+r[6]+'</td></tr>';}).join("")+'</tbody>';}
+  $("exDay").innerHTML='<thead><tr><th>언제</th><th>한 일</th><th>걸린 시간</th><th>얼마나 자주</th></tr></thead><tbody>'+EXDAY.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+esc(r[1])+'</td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td></tr>';}).join("")+'</tbody>';
+  $("exTop").innerHTML=exTopTable(EXTOP);$("exSo").textContent=EXSO;
+  $("exTop2").innerHTML=exTopTable(EXTOP2);$("exSo2").textContent=EXSO2;
+  $("guide").innerHTML=GUIDE.map(function(g){return '<li><b>'+g[0]+'</b>'+esc(g[1])+'</li>';}).join("");
+
+  function renderDayList(kind){
+    var opts=kind==="day"?FREQD:FREQW;
+    $(kind+"Rows").innerHTML=S[kind].map(function(r,i){var p=kind+"."+i+".";
+      return '<div class="item"><div class="g-day">'+fld("언제",txt(r[0],p+0,"언제",i||kind!=="day"?"":"9시"))+fld("한 일",txt(r[1],p+1,"한 일",i||kind!=="day"?"":"출근해서 처음 한 일"),"wide")+fld("걸린 시간",numIn(r[2],p+2,"걸린 시간","0.5","24"))+fld(kind==="day"?"매일 / 주 몇 번":"매주 / 매달",sel(opts,r[3],p+3,"얼마나 자주"))+'</div></div>';}).join("");
+  }
+  function renderTop(){
+    $("topRows").innerHTML=S.top.map(function(r,i){var p="top."+i+".";
+      return '<div class="item'+(/^★/.test(r[6]||"")?" on":"")+'">'+fld("하는 일",txt(r[0],p+0,"하는 일"))+'<div class="g-top">'+fld("몇 % (합계 100)",numIn(r[1],p+1,"내 시간 중 몇 %","5","100"))+fld("얼마나 자주",sel(FREQ,r[2],p+2,"얼마나 자주"))+fld("한 번에 몇 시간",sel(HRS,r[3],p+3,"한 번에 몇 시간"))+fld("얼마나 단순한가",sel(LV,r[4],p+4,"얼마나 단순한가"))+fld("TOP3 ★",sel(STAR,r[6],p+6,"TOP3 별표"))+'</div>'+fld("누구에게 (AI · 직원 · 나)",txt(r[5],p+5,"누구에게"))+'</div>';}).join("");
+    renderSums();
+  }
+  function renderSums(){
+    var t=0,s=0,any=false;S.top.forEach(function(r){var v=parseFloat(r[1]);if(!isNaN(v)){any=true;t+=v;if(/^★/.test(r[6]||""))s+=v;}});
+    var badge=!any||t===0?"":(t===100?'<span class="ok">100 맞아요</span>':'<span class="warn">합계를 100으로 맞춰요</span>');
+    $("topSums").innerHTML='<span>합계 <b>'+(any?t:"-")+'</b></span><span>TOP3 합계 <b>'+(s||"-")+'</b></span>'+badge;
+  }
+  function stars(){var m={};S.top.forEach(function(r){if(/^★/.test(r[6]||"")&&r[0])m[r[6]]=r[0];});return STAR.filter(function(k){return m[k];}).map(function(k){return k+" "+m[k];}).join(" · ");}
+  function onTopInput(el){var a=el.dataset.k.split(".");S[a[0]][+a[1]][+a[2]]=el.value;
+    if(a[0]==="top"&&+a[2]===6&&el.value){var dup=false;S.top.forEach(function(r,i){if(i!==+a[1]&&r[6]===el.value){r[6]="";dup=true;}});save();if(dup){renderTop();return;}}
+    save();if(a[0]==="top"){if(+a[2]===6)el.closest(".item").classList.toggle("on",/^★/.test(el.value));renderSums();}}
+  ["dayRows","weekRows","topRows"].forEach(function(id){var h=function(e){if(e.target.dataset.k)onTopInput(e.target);};$(id).addEventListener("input",h);$(id).addEventListener("change",h);});
+  [].forEach.call(document.querySelectorAll("[data-add]"),function(b){b.addEventListener("click",function(){var k=b.dataset.add;S[k].push(blank(1,k==="top"?7:4)[0]);save();k==="top"?renderTop():renderDayList(k);});});
+
+  /* ---------- 한 줄 카드 ---------- */
+  var STOPS=[
+    {v:"첫 번째",n:"한 번 세팅이면 끝이라 생각하기",w:"처음 몇 번 고쳐 주다가 계속 이렇게 손이 가면 의미 없겠다 싶어 멈췄다",nx:"매번 「했어? 매뉴얼 반영했어?」까지 묻기"},
+    {v:"두 번째",n:"결과를 뭉뚱그려 말하고 탓하며 접기",w:"결과가 별로일 때 뭐가 틀렸는지는 말하지 않고 그냥 바꿔 달라고만 하거나, AI·직원 탓을 하다 멈췄다",nx:"어디가 왜 별로인지 짚어서 말하고 기준에 반영하기"},
+    {v:"세 번째",n:"좋은 결과를 스킬로 안 남기기",w:"잘 나온 결과를 그냥 쓰고 넘어가서, 다음에 또 처음부터 설명하다 지쳐 멈췄다",nx:"잘 나오면 「스킬로 만들어 줘」"}];
+  function renderStops(){
+    $("stopPick").innerHTML=STOPS.map(function(s){return '<button type="button" data-v="'+s.v+'" aria-pressed="'+(S.card.stop===s.v)+'"><b>'+s.v+' · '+s.n+'</b><span>이럴 때: '+s.w+'</span></button>';}).join("");
+  }
+  function cardLine(){var c=S.card;return "「나는 "+(c.job||"(일)")+"을 맡기다 "+(c.stop||"(첫 번째 / 두 번째 / 세 번째)")+" 공통점에서 멈추는 사람이다. 다음엔 "+(c.next||"(첫 걸음)")+"부터.」";}
+  function renderCard(){$("cardLine").textContent=cardLine();}
+  $("stopPick").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;S.card.stop=b.dataset.v;
+    if(!S.card.next){var s=STOPS.filter(function(x){return x.v===b.dataset.v;})[0];S.card.next=s.nx;$("c_next").value=s.nx;}
+    save();renderStops();renderCard();});
+
+  /* ---------- 지시 점검표 ---------- */
+  var FIVE=[
+    {k:"bg",n:"진행 배경",d:"왜 하는지",ex:"신제품을 냈는데 아직 아는 사람이 적어서, 팔로워가 많은 A님과 공구로 처음 알리고 팔아 보려고 해요."},
+    {k:"result",n:"성공적인 결과",d:"끝났을 때 모습과 숫자",ex:"공구 7일 동안 500개 판매. A님 팔로워들이 신제품을 알게 되고 써 본 후기가 올라오는 모습."},
+    {k:"ref",n:"참고 자료",d:"내가 골라서 주기",ex:"지난번 공구 판매 기록, 반응 좋았던 공구 소개 글 2~3개."},
+    {k:"proc",n:"업무 프로세스",d:"어떤 순서로, 중간엔 언제",ex:"제품 정보 정리 → A님께 전달 → 소개 글 준비 → 오픈 공지 → 문의 응대 → 마감 뒤 정산."},
+    {k:"due",n:"데드라인",d:"언제까지",ex:"11월 10일 공구 오픈, 소개 글은 11월 5일까지."}];
+  $("exFive").innerHTML=
+    '<div><span class="k">진행 배경</span><span>신제품을 냈는데 아직 아는 사람이 적어서, 팔로워가 많은 A님과 공구로 처음 알리고 팔아 보려고 해요.</span></div>'+
+    '<div><span class="k">성공적인 결과</span><span><b>정량</b> 공구 7일 동안 500개 판매<br><b>정성</b> A님 팔로워들이 신제품을 알게 되고 써 본 후기가 올라오는 모습</span></div>'+
+    '<div><span class="k">참고 자료</span><span>지난번 공구 판매 기록, 반응 좋았던 공구 소개 글 2~3개</span></div>'+
+    '<div><span class="k">업무 프로세스</span><span>제품 정보 정리 → A님께 전달 → 소개 글 준비 → 오픈 공지 → 문의 응대 → 마감 뒤 정산</span></div>'+
+    '<div><span class="k">데드라인</span><span>11월 10일 공구 오픈, 소개 글은 11월 5일까지</span></div>';
+  function seg(label,val){return '<div class="seg" role="group" aria-label="'+esc(label)+'"><button type="button" data-v="have" aria-pressed="'+(val==="have")+'">있음</button><button type="button" data-v="miss" aria-pressed="'+(val==="miss")+'">없음</button></div>';}
+  function renderMarks(){$("markRows").innerHTML=FIVE.map(function(x){return '<div data-k="'+x.k+'"><span class="k">'+x.n+'<small>'+x.d+'</small></span>'+seg(x.n,S.check.mark[x.k])+'</div>';}).join("");}
+  function renderFill(){
+    $("fillRows").innerHTML=FIVE.map(function(x){var m=S.check.mark[x.k];
+      return '<div class="'+(m==="miss"?"is-miss":"")+'"><span class="k"><label for="f_'+x.k+'">'+x.n+'</label>'+(m==="miss"?'<small style="color:var(--miss);font-weight:800">빠짐</small>':(m==="have"?'<small style="color:var(--have);font-weight:800">있음</small>':''))+'</span><div class="f"><textarea id="f_'+x.k+'" data-fill="'+x.k+'" placeholder="'+(m==="miss"?"한 줄 채워 보세요":"내 말에서 옮겨 적어요")+'">'+esc(S.check.fill[x.k]||"")+'</textarea><p class="ex-line"><b>예시</b> '+esc(x.ex)+'</p></div></div>';}).join("");
+  }
+  function missInfo(){var miss=FIVE.filter(function(x){return S.check.mark[x.k]==="miss";});var marked=FIVE.filter(function(x){return S.check.mark[x.k];}).length;return {miss:miss,marked:marked};}
+  function checkDoc(){var L=["[하려는 일] "+(S.check.line||"(1에 내 한마디를 적어요)")];FIVE.forEach(function(x){L.push(x.n+": "+((S.check.fill[x.k]||"").trim()||"____"));});return L.join("\n");}
+  function renderScore(){var m=missInfo();$("missCount").textContent=(m.marked<5?"-":m.miss.length)+" / 5";
+    $("missNames").textContent=m.marked<5?"다섯 줄을 모두 표시하면 빠진 칸 이름이 나와요":(m.miss.length?"빠진 칸: "+m.miss.map(function(x){return x.n;}).join(", "):"다 들어 있어요");
+    $("checkDoc").textContent=checkDoc();}
+  $("markRows").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var k=b.closest("[data-k]").dataset.k;S.check.mark[k]=b.dataset.v;save();renderMarks();renderFill();renderScore();});
+  $("fillRows").addEventListener("input",function(e){var k=e.target.dataset.fill;if(!k)return;S.check.fill[k]=e.target.value;save();renderScore();});
+
+  /* ---------- 파트 1 진단 한 장 ---------- */
+  function checkSummary(){var m=missInfo();if(!S.check.line)return "";return "「"+S.check.line+"」 · "+(m.marked<5?"표시 중":m.miss.length+" / 5"+(m.miss.length?" ("+m.miss.map(function(x){return x.n;}).join(", ")+")":""));}
+  function cardSummary(){return S.card.stop?S.card.stop+" · "+(S.card.next||""):"";}
+  function renderSheet(){
+    var none='<span class="hint">아직 비어 있어요</span>';
+    var st=stars();$("s_top").innerHTML=st?esc(st):none;
+    var c=checkSummary();$("s_check").innerHTML=c?esc(c):none;
+    var d=cardSummary();$("s_card").innerHTML=d?esc(d):none;
+  }
+
+  /* ---------- 글자 칸 묶기 ---------- */
+  [].forEach.call(document.querySelectorAll("[data-bind]"),function(el){el.value=getPath(el.dataset.bind);
+    el.addEventListener("input",function(){setPath(el.dataset.bind,el.value);save();renderCard();renderScore();});});
+
+  /* ---------- 복사 ---------- */
+  function fallback(text){var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();try{document.execCommand("copy");}catch(e){}t.remove();}
+  function copyText(kind){
+    if(kind==="check")return checkDoc();
+    if(kind==="card")return "[한 줄 카드]\n맡기다 접은 일: "+(S.card.job||"")+"\n그때 무슨 일: "+(S.card.what||"")+"\n어디서 멈췄나: "+(S.card.stop||"")+"\n다음엔: "+(S.card.next||"")+"\n"+cardLine();
+    if(kind==="top3"){var L=["[내 업무 자동화 우선순위 TOP3 표]","TOP3: "+(stars()||"아직 없음"),""];S.top.forEach(function(r){if(r[0])L.push(r[0]+" | "+(r[1]||"")+"% | "+(r[2]||"")+" | "+(r[3]||"")+" | "+(r[4]||"")+" | "+(r[5]||"")+" | "+(r[6]||""));});return L.join("\n");}
+    renderSheet();
+    return "[파트 1 진단 한 장]\nAI 업무 시스템 진단: "+(S.sheet.diag||"")+"\n우선순위 TOP3: "+stars()+"\n지시 점검표: "+checkSummary()+"\n한 줄 카드: "+cardSummary()+"\n한눈에 보이는 빈 곳: "+(S.sheet.gap||"");
+  }
+  [].forEach.call(document.querySelectorAll("[data-copy]"),function(b){b.addEventListener("click",function(){
+    var kind=b.dataset.copy,text=copyText(kind),d=document.querySelector('[data-done="'+kind+'"]');
+    var ok=function(){d.hidden=false;setTimeout(function(){d.hidden=true;},1800);};
+    try{navigator.clipboard.writeText(text).then(ok,function(){fallback(text);ok();});}catch(e){fallback(text);ok();}
+  });});
+
+  /* ---------- 처음 그리기 ---------- */
+  renderDayList("day");renderDayList("week");renderTop();renderStops();renderCard();renderMarks();renderFill();renderScore();
+  openTab((location.hash||"").slice(1));
+})();
+</script>
+
 </html>
