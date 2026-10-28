@@ -264,7 +264,7 @@ details[open] summary{margin-bottom:8px}
 
     <div class="card">
       <div class="card-head"><span class="step">3</span><h3>내 표 적기</h3></div>
-      <p class="hint">주기를 고르고, 하는 일을 적고, 한 번에 몇 시간인지 숫자로 넣고(30분 = 0.5), 단계를 골라요.</p>
+      <p class="hint">주기를 고르고, 하는 일을 적고, 한 번에 몇 시간인지 숫자로 넣고(30분 = 0.5), 단계를 골라요. 한 달은 일하는 날 22일 · 4.3주로 계산해요.</p>
       <div class="tbl"><table class="grid" id="grid"></table></div>
       <div class="btns"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button></div>
       <p class="lbl">결과</p>
@@ -408,7 +408,7 @@ details[open] summary{margin-bottom:8px}
   /* ---------- 저장 ---------- */
   var KEY="facam-materials-onepage-v1";
   function blank(n,w){var a=[];for(var i=0;i<n;i++){var r=[];for(var j=0;j<w;j++)r.push("");a.push(r);}return a;}
-  var S={t3:blank(5,4),card:{},check:{line:"",mark:{},fill:{}},sheet:{}};
+  var S={t3:blank(9,4),card:{},check:{line:"",mark:{},fill:{}},sheet:{}};
   var canSave=true;
   try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var p in o)S[p]=o[p];}localStorage.setItem(KEY+"-t","1");}catch(e){canSave=false;}
   function hhmm(){var d=new Date();return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}
@@ -477,7 +477,7 @@ details[open] summary{margin-bottom:8px}
       ["매달","경비 · 법인카드 정산","2",LV[0]],
       ["매달","다음 달 업무 계획 세우기","3",LV[1]]]}};
   $("lvGuide").innerHTML=LVG.map(function(g){return '<li><b>'+g[0]+'</b>'+esc(g[1])+'</li>';}).join("");
-  if(!S.t3)S.t3=blank(6,4);
+  if(!S.t3)S.t3=blank(9,4);
   function bigHtml(rows){var tot=rows.reduce(function(s,r){return s+month(r);},0),t=ranked(rows),sum=t.reduce(function(s,x){return s+x.m;},0);
     return '<div class="bn"><span>반복 업무에 버리는 시간 (한 달)</span><b>'+fmt(tot)+'<small>시간</small></b></div>'
       +'<div class="bn hl"><span>TOP3만 넘겨도 돌아오는 시간</span><b>'+fmt(sum)+'<small>시간</small></b></div>'
