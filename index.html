@@ -142,6 +142,7 @@ tr.hit td{background:var(--accent-soft)}
 }
 
 .big{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.legend{background:var(--ex);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:grid;gap:6px}
 .bn{background:var(--paper);border:1.5px solid var(--line-strong);border-radius:12px;padding:12px 14px;display:grid;gap:2px}
 .bn span{font-size:13.5px;color:var(--sub);font-weight:700}
 .bn b{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}.bn b small{font-size:16px;margin-left:3px}
@@ -248,11 +249,13 @@ details[open] summary{margin-bottom:8px}
         <button type="button" data-g="ceo" aria-pressed="false">예시 · 온라인 판매 대표님</button>
         <button type="button" data-g="staff" aria-pressed="false">예시 · 회사원</button>
       </div>
-      <div class="big" id="gBig"></div>
-      <div class="tbl"><table class="grid" id="grid"></table></div>
-      <div class="btns" id="gMine"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
       <p class="hint" id="gSrc"></p>
-      <details><summary>단계 고르는 법 · TOP3 고르는 순서</summary><ul class="guide" id="lvGuide"></ul></details>
+      <div class="tbl"><table class="grid" id="grid"></table></div>
+      <div class="btns" id="gMine"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button></div>
+      <div class="legend"><p class="lbl">단계 고르는 법 · TOP3 고르는 순서</p><ul class="guide" id="lvGuide"></ul></div>
+      <p class="lbl">결과</p>
+      <div class="big" id="gBig"></div>
+      <div class="btns" id="gCopy"><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
     </div>
   </section>
 
@@ -478,7 +481,7 @@ details[open] summary{margin-bottom:8px}
         +'<td>'+(ro?lvNo(r[3])+'단계':sel(LV,r[3],p+3,"단계"))+'</td>'
         +'<td class="num out" id="gm'+i+'">'+(m?fmt(m)+'시간':'')+'</td>'
         +'<td class="star" id="gr'+i+'">'+(pos[i]?'TOP'+pos[i]:'')+'</td></tr>';}).join("")+'</tbody>';
-    $("gBig").innerHTML=bigHtml(rows);$("gMine").hidden=ro;$("gSrc").textContent=ro?EX[G].src:"한 달은 일하는 날 22일 · 4.3주로 계산해요. 30분은 0.5로 적어요.";
+    $("gBig").innerHTML=bigHtml(rows);$("gMine").hidden=ro;$("gCopy").hidden=ro;$("gSrc").textContent=ro?EX[G].src:"한 달은 일하는 날 22일 · 4.3주로 계산해요. 30분은 0.5로 적어요.";
     [].forEach.call(document.querySelectorAll("#gPick button"),function(b){b.setAttribute("aria-pressed",b.dataset.g===G);});}
   function refresh(){var rows=S.t3,top=ranked(rows),pos={};top.forEach(function(x,k){pos[x.i]=k+1;});
     rows.forEach(function(r,i){var m=month(r);$("gm"+i).textContent=m?fmt(m)+'시간':'';$("gr"+i).textContent=pos[i]?'TOP'+pos[i]:'';$("gm"+i).parentNode.classList.toggle("hit",!!pos[i]);});
