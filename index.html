@@ -117,11 +117,14 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .sums{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;font-weight:700}
 .sums b{font-size:22px;font-variant-numeric:tabular-nums}
 .ok{color:var(--have)} .warn{color:var(--miss)}
-.grid{min-width:640px;font-size:15px;color:var(--ink)}
-.grid th{white-space:nowrap;background:var(--ink);color:var(--paper);font-size:13.5px;font-weight:700}
-.grid td{vertical-align:middle;padding:5px 4px}
-.grid td:nth-child(1){width:118px}.grid td:nth-child(3){width:78px}.grid td:nth-child(4){width:150px}
-.grid td:nth-child(5),.grid td:nth-child(6){white-space:nowrap;width:64px}
+.grid{width:100%;min-width:600px;table-layout:fixed;font-size:15px;color:var(--ink)}
+.grid col.c-f{width:13%}.grid col.c-h{width:11%}.grid col.c-l{width:25%}.grid col.c-m{width:11%}.grid col.c-r{width:9%}
+.grid th{background:var(--ink);color:var(--paper);font-size:13.5px;font-weight:700;text-align:center;padding:9px 6px;line-height:1.35}
+.grid td{vertical-align:middle;padding:9px 8px;text-align:center;font-variant-numeric:tabular-nums}
+.grid td:nth-child(2){text-align:left}
+.grid td.num{text-align:center}
+.grid td:nth-child(5),.grid td:nth-child(6){white-space:nowrap}
+.grid input[type=number]{text-align:center}
 .grid select,.grid input{font-size:14px;padding:6px 6px;min-height:36px}
 .grid td.out{font-weight:800;color:var(--accent-ink)}
 .grid .q{font-size:13px;color:var(--miss);font-weight:700}
@@ -136,7 +139,8 @@ tr.hit td{background:var(--accent-soft)}
   .grid tbody td:nth-child(1)::before{content:"주기"}.grid tbody td:nth-child(3)::before{content:"한 번에(시간)"}.grid tbody td:nth-child(4)::before{content:"단계"}
   .grid tbody td:nth-child(5)::before{content:"한 달"}.grid tbody td:nth-child(6)::before{content:"순위"}
   .grid tbody td::before{font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px}
-  .grid tbody td:nth-child(3),.grid tbody td.num{text-align:left}
+  .grid tbody td,.grid tbody td.num{text-align:left}
+  .grid colgroup{display:none}
   .grid tbody td:nth-child(4){grid-column:span 1}
   .big{grid-template-columns:1fr 1fr}.bn b{font-size:28px}
 }
@@ -244,18 +248,28 @@ details[open] summary{margin-bottom:8px}
     </div>
 
     <div class="card">
-      <div class="seg" id="gPick" role="group" aria-label="표 고르기">
-        <button type="button" data-g="mine" aria-pressed="true">내 표 적기</button>
-        <button type="button" data-g="ceo" aria-pressed="false">예시 · 온라인 판매 대표님</button>
-        <button type="button" data-g="staff" aria-pressed="false">예시 · 회사원</button>
-      </div>
-      <p class="hint" id="gSrc"></p>
-      <div class="tbl"><table class="grid" id="grid"></table></div>
-      <div class="btns" id="gMine"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button></div>
+      <div class="card-head"><span class="step">1</span><h3>예시 · 온라인 판매 대표님</h3></div>
+      <div class="tbl"><table class="grid" id="gridCeo"></table></div>
       <div class="legend"><p class="lbl">단계 고르는 법 · TOP3 고르는 순서</p><ul class="guide" id="lvGuide"></ul></div>
       <p class="lbl">결과</p>
+      <div class="big" id="bigCeo"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">2</span><h3>예시 · 회사원</h3></div>
+      <div class="tbl"><table class="grid" id="gridStaff"></table></div>
+      <p class="lbl">결과</p>
+      <div class="big" id="bigStaff"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="step">3</span><h3>내 표 적기</h3></div>
+      <p class="hint">주기를 고르고, 하는 일을 적고, 한 번에 몇 시간인지 숫자로 넣고(30분 = 0.5), 단계를 골라요.</p>
+      <div class="tbl"><table class="grid" id="grid"></table></div>
+      <div class="btns"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button></div>
+      <p class="lbl">결과</p>
       <div class="big" id="gBig"></div>
-      <div class="btns" id="gCopy"><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
+      <div class="btns"><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
     </div>
   </section>
 
@@ -451,8 +465,7 @@ details[open] summary{margin-bottom:8px}
       ["매주","인플루언서 연락 (공구 · 협찬)","1",LV[1]],
       ["매달","재고 확인 · 입고 신청","1",LV[0]],
       ["매달","플랫폼 행사 · 프로모션 신청","1",LV[0]],
-      ["매달","신제품 기획","8",LV[2]]],
-     src:"온라인 판매 회사 세 곳의 업무분장표에 공통으로 있는 반복 업무예요."},
+      ["매달","신제품 기획","8",LV[2]]]},
     staff:{rows:[
       ["매일","메일 확인 · 답장","1",LV[0]],
       ["매일","회의록 정리 · 공유","0.5",LV[0]],
@@ -462,34 +475,32 @@ details[open] summary{margin-bottom:8px}
       ["매주","팀 회의","2",LV[2]],
       ["매달","월간 실적 보고서 작성","4",LV[1]],
       ["매달","경비 · 법인카드 정산","2",LV[0]],
-      ["매달","다음 달 업무 계획 세우기","3",LV[1]]],
-     src:"회사원이라면 누구나 하는 반복 업무로 만든 예시예요. 시간은 보통 걸리는 만큼 넣었어요."}};
+      ["매달","다음 달 업무 계획 세우기","3",LV[1]]]}};
   $("lvGuide").innerHTML=LVG.map(function(g){return '<li><b>'+g[0]+'</b>'+esc(g[1])+'</li>';}).join("");
   if(!S.t3)S.t3=blank(6,4);
-  var G=S.t3.some(function(r){return r[1];})?"mine":"ceo";   // 처음 온 사람은 예시부터, 적어 둔 게 있으면 내 표
-  function rowsOf(){return G==="mine"?S.t3:EX[G].rows;}
   function bigHtml(rows){var tot=rows.reduce(function(s,r){return s+month(r);},0),t=ranked(rows),sum=t.reduce(function(s,x){return s+x.m;},0);
     return '<div class="bn"><span>반복 업무에 버리는 시간 (한 달)</span><b>'+fmt(tot)+'<small>시간</small></b></div>'
       +'<div class="bn hl"><span>TOP3만 넘겨도 돌아오는 시간</span><b>'+fmt(sum)+'<small>시간</small></b></div>'
       +'<ol class="tops">'+(t.length?t.map(function(x,k){return '<li><span class="badge">TOP'+(k+1)+'</span><b>'+esc(x.r[1])+'</b><span class="m">한 달 '+fmt(x.m)+'시간 · '+WHO[x.l-1]+'</span></li>';}).join(""):'<li class="empty">표를 채우면 여기에 TOP3가 떠요</li>')+'</ol>';}
-  function renderGrid(){var rows=rowsOf(),ro=G!=="mine",top=ranked(rows),pos={};top.forEach(function(x,k){pos[x.i]=k+1;});
-    $("grid").innerHTML='<thead><tr><th>주기</th><th>하는 일</th><th>한 번에<br>(시간)</th><th>단계</th><th>한 달</th><th>순위</th></tr></thead><tbody>'+rows.map(function(r,i){var p="t3."+i+".",m=month(r);
+  // 예시 두 개는 읽기 전용 표로 위에, 내 표는 맨 아래 (시연이 위에서 아래로만 내려가게)
+  function renderGrid(gid,bid,rows,ro){var top=ranked(rows),pos={},pf=ro?gid:"g";top.forEach(function(x,k){pos[x.i]=k+1;});
+    $(gid).innerHTML='<colgroup><col class="c-f"><col><col class="c-h"><col class="c-l"><col class="c-m"><col class="c-r"></colgroup>'+'<thead><tr><th>주기</th><th>하는 일</th><th>한 번에<br>(시간)</th><th>단계</th><th>한 달</th><th>순위</th></tr></thead><tbody>'+rows.map(function(r,i){var p="t3."+i+".",m=month(r);
       return '<tr'+(pos[i]?' class="hit"':'')+'>'
         +'<td>'+(ro?esc(r[0]):sel(FREQ.map(function(f){return f[0];}),r[0],p+0,"주기"))+'</td>'
         +'<td>'+(ro?esc(r[1]):txt(r[1],p+1,"하는 일",i?"":"예: 고객 문의 답변"))+'</td>'
         +'<td class="num">'+(ro?(r[2]?esc(r[2]):'<span class="q">확인 중</span>'):numIn(r[2],p+2,"한 번에 몇 시간","0.5","200"))+'</td>'
         +'<td>'+(ro?lvNo(r[3])+'단계':sel(LV,r[3],p+3,"단계"))+'</td>'
-        +'<td class="num out" id="gm'+i+'">'+(m?fmt(m)+'시간':'')+'</td>'
-        +'<td class="star" id="gr'+i+'">'+(pos[i]?'TOP'+pos[i]:'')+'</td></tr>';}).join("")+'</tbody>';
-    $("gBig").innerHTML=bigHtml(rows);$("gMine").hidden=ro;$("gCopy").hidden=ro;$("gSrc").textContent=ro?EX[G].src:"한 달은 일하는 날 22일 · 4.3주로 계산해요. 30분은 0.5로 적어요.";
-    [].forEach.call(document.querySelectorAll("#gPick button"),function(b){b.setAttribute("aria-pressed",b.dataset.g===G);});}
+        +'<td class="num out" id="'+pf+'m'+i+'">'+(m?fmt(m)+'시간':'')+'</td>'
+        +'<td class="star" id="'+pf+'r'+i+'">'+(pos[i]?'TOP'+pos[i]:'')+'</td></tr>';}).join("")+'</tbody>';
+    $(bid).innerHTML=bigHtml(rows);}
   function refresh(){var rows=S.t3,top=ranked(rows),pos={};top.forEach(function(x,k){pos[x.i]=k+1;});
     rows.forEach(function(r,i){var m=month(r);$("gm"+i).textContent=m?fmt(m)+'시간':'';$("gr"+i).textContent=pos[i]?'TOP'+pos[i]:'';$("gm"+i).parentNode.classList.toggle("hit",!!pos[i]);});
     $("gBig").innerHTML=bigHtml(rows);}
-  [].forEach.call(document.querySelectorAll("#gPick button"),function(b){b.addEventListener("click",function(){G=b.dataset.g;renderGrid();});});
-  function onG(e){var k=e.target.dataset.k;if(!k||G!=="mine")return;var a=k.split(".");S.t3[+a[1]][+a[2]]=e.target.value;save();refresh();}
+  function renderMine(){renderGrid("grid","gBig",S.t3,false);}
+  renderGrid("gridCeo","bigCeo",EX.ceo.rows,true);renderGrid("gridStaff","bigStaff",EX.staff.rows,true);
+  function onG(e){var k=e.target.dataset.k;if(!k)return;var a=k.split(".");S.t3[+a[1]][+a[2]]=e.target.value;save();refresh();}
   $("grid").addEventListener("input",onG);$("grid").addEventListener("change",onG);
-  $("gAdd").addEventListener("click",function(){S.t3.push(blank(1,4)[0]);save();renderGrid();});
+  $("gAdd").addEventListener("click",function(){S.t3.push(blank(1,4)[0]);save();renderMine();});
   function stars(){return ranked(S.t3).map(function(x,k){return "TOP"+(k+1)+" "+x.r[1];}).join(" · ");}
 
   /* ---------- 한 줄 카드 ---------- */
@@ -567,7 +578,7 @@ details[open] summary{margin-bottom:8px}
   $("howto").addEventListener("toggle",function(){try{localStorage.setItem(KEY+"-howto",$("howto").open?"open":"closed");}catch(e){}});
 
   /* ---------- 처음 그리기 ---------- */
-  renderGrid();renderStops();renderCard();renderMarks();renderFill();renderScore();
+  renderMine();renderStops();renderCard();renderMarks();renderFill();renderScore();
   openTab((location.hash||"").slice(1));
 })();
 </script>
