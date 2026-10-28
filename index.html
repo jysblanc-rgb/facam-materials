@@ -6,26 +6,26 @@
 <style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
 <title>패캠 강의 자료실</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 /* 레이아웃: 강의 제목 → 자료 이름 탭(위에 붙음) → 탭 하나 = 자료 하나. 자료마다 베스트 예시 → 내 것 적기 → 내 답 복사. 맨 아래 작은 상담 한 줄 */
 :root{
-  --bg:#f2f3ef; --paper:#ffffff; --ink:#1a1a1a; --sub:#50564c; --faint:#7b8277; --line:#d3d7cd; --line-strong:#a9afa3;
-  --accent:#0f5c48; --accent-soft:#e1efe9; --accent-ink:#0b4a39;
-  --miss:#b4471f; --miss-soft:#fbeae2; --have:#1f6e3c; --have-soft:#e3f2e7;
-  --ex:#f7f6ee; --bubble:#fff4c7;
-  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --bg:#F5F0EA; --paper:#ffffff; --ink:#231815; --sub:#4a403b; --faint:#6b605a; --line:#e6dcd0; --line-strong:#c9b8a5;
+  --accent:#E87200; --accent-soft:#fdeedd; --accent-ink:#a95300;
+  --miss:#b4471f; --miss-soft:#fbeae2; --have:#2f7a4a; --have-soft:#e3f2e7;
+  --ex:#fbf8f4; --bubble:#fff1dc;
+  --f-body:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#131713; --paper:#1c211d; --ink:#eef0ea; --sub:#b8beb3; --faint:#8b9287; --line:#343c34; --line-strong:#56604f;
-  --accent:#5fc3a0; --accent-soft:#1f3a31; --accent-ink:#8fe0c2;
+  --bg:#1c1715; --paper:#262019; --ink:#f5f0ea; --sub:#d6cbc0; --faint:#ad9f93; --line:#3d332c; --line-strong:#5e5047;
+  --accent:#f08a1c; --accent-soft:#3d2a17; --accent-ink:#ffb35c;
   --miss:#f0916b; --miss-soft:#3d241a; --have:#7fd39a; --have-soft:#1c3324;
-  --ex:#232820; --bubble:#3d3720; color-scheme:dark}}
+  --ex:#221c18; --bubble:#3d2f1c; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#131713; --paper:#1c211d; --ink:#eef0ea; --sub:#b8beb3; --faint:#8b9287; --line:#343c34; --line-strong:#56604f;
-  --accent:#5fc3a0; --accent-soft:#1f3a31; --accent-ink:#8fe0c2;
+  --bg:#1c1715; --paper:#262019; --ink:#f5f0ea; --sub:#d6cbc0; --faint:#ad9f93; --line:#3d332c; --line-strong:#5e5047;
+  --accent:#f08a1c; --accent-soft:#3d2a17; --accent-ink:#ffb35c;
   --miss:#f0916b; --miss-soft:#3d241a; --have:#7fd39a; --have-soft:#1c3324;
-  --ex:#232820; --bubble:#3d3720; color-scheme:dark}
+  --ex:#221c18; --bubble:#3d2f1c; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;font-weight:500;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -41,6 +41,9 @@ a{color:var(--accent-ink);font-weight:700}
 .sub{color:var(--sub)}
 .hint{font-size:14.5px;color:var(--sub)}
 .top{display:grid;gap:8px}
+.logo{width:112px;height:auto;display:block;margin-bottom:6px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo{filter:invert(1) hue-rotate(180deg)}}
+:root[data-theme="dark"] .logo{filter:invert(1) hue-rotate(180deg)}
 .guidebox{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 14px;border-top:1px solid var(--line)}
 .guidebox summary{font-size:14.5px}
 .guidebox ol{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14.5px;color:var(--sub)}
@@ -114,6 +117,43 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .sums{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;font-weight:700}
 .sums b{font-size:22px;font-variant-numeric:tabular-nums}
 .ok{color:var(--have)} .warn{color:var(--miss)}
+.grid{min-width:640px;font-size:15px;color:var(--ink)}
+.grid th{white-space:nowrap;background:var(--ink);color:var(--paper);font-size:13.5px;font-weight:700}
+.grid td{vertical-align:middle;padding:5px 4px}
+.grid td:nth-child(1){width:118px}.grid td:nth-child(3){width:78px}.grid td:nth-child(4){width:150px}
+.grid td:nth-child(5),.grid td:nth-child(6){white-space:nowrap;width:64px}
+.grid select,.grid input{font-size:14px;padding:6px 6px;min-height:36px}
+.grid td.out{font-weight:800;color:var(--accent-ink)}
+.grid .q{font-size:13px;color:var(--miss);font-weight:700}
+tr.hit td{background:var(--accent-soft)}
+@media (max-width:600px){tr.hit{background:var(--accent-soft)}tr.hit td{background:transparent}}
+@media (max-width:600px){
+  .grid{min-width:0;font-size:14.5px}
+  .grid thead{display:none}
+  .grid tbody tr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 8px;padding:10px 4px;border-bottom:1px solid var(--line)}
+  .grid tbody td{border:0;padding:0;width:auto!important;display:flex;flex-direction:column;justify-content:center}
+  .grid tbody td:nth-child(2){grid-column:1/4;order:-1;font-weight:700}
+  .grid tbody td:nth-child(1)::before{content:"주기"}.grid tbody td:nth-child(3)::before{content:"한 번에(시간)"}.grid tbody td:nth-child(4)::before{content:"단계"}
+  .grid tbody td:nth-child(5)::before{content:"한 달"}.grid tbody td:nth-child(6)::before{content:"순위"}
+  .grid tbody td::before{font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px}
+  .grid tbody td:nth-child(3),.grid tbody td.num{text-align:left}
+  .grid tbody td:nth-child(4){grid-column:span 1}
+  .big{grid-template-columns:1fr 1fr}.bn b{font-size:28px}
+}
+
+.big{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bn{background:var(--paper);border:1.5px solid var(--line-strong);border-radius:12px;padding:12px 14px;display:grid;gap:2px}
+.bn span{font-size:13.5px;color:var(--sub);font-weight:700}
+.bn b{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}.bn b small{font-size:16px;margin-left:3px}
+.bn.hl{background:var(--accent-soft);border-color:var(--accent)}.bn.hl b{color:var(--accent-ink)}
+.big .tops{grid-column:1/3}
+.tops{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.tops li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;border:1.5px solid var(--accent);border-radius:12px;padding:9px 12px;background:var(--paper)}
+.tops li.empty{border-style:dashed;color:var(--sub);font-size:14px}
+.tops .badge{font-size:13px;font-weight:800;color:var(--paper);background:var(--accent);border-radius:999px;padding:2px 10px}
+.tops b{font-size:16px}.tops .m{font-size:13.5px;color:var(--sub);margin-left:auto}
+.seg button[aria-pressed=true][data-g]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+
 
 .seg{display:flex;gap:6px;flex-wrap:wrap}
 .seg button{font:inherit;font-size:14.5px;font-weight:700;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--sub);padding:6px 14px;min-height:40px;cursor:pointer}
@@ -148,6 +188,7 @@ details[open] summary{margin-bottom:8px}
 <div class="wrap">
 
   <header class="top">
+    <img class="logo" src="assets/simplekey-logo.png" alt="심플키 컨설팅 그룹" width="112" height="68">
     <p class="eyebrow">패스트캠퍼스 · 강의 자료실</p>
     <h1>클로드 AI 비서 3명으로 모든 업무 끝!<br>24시간 돌아가는 에이스팀</h1>
     <details class="guidebox" id="howto" open>
@@ -198,38 +239,20 @@ details[open] summary{margin-bottom:8px}
   <section class="panel" role="tabpanel" id="top3" aria-labelledby="t-top3" hidden>
     <div class="panel-head">
       <h2>내 업무 자동화 우선순위 TOP3 표</h2>
-      <p class="sub">하루를 적고, 시간으로 재서, 먼저 넘길 일 세 개를 골라요.</p>
-      <div class="todo"><span>베스트 예시 보기</span><span>1 하루 적기</span><span>2 TOP3 고르기</span></div>
-    </div>
-
-    <div class="card ex">
-      <div class="card-head"><span class="step">예</span><h3>베스트 예시 · 마케팅팀 4년 차 직장인</h3><span class="tag">지어낸 예시예요</span></div>
-      <p class="lbl">1 하루 적기</p>
-      <div class="tbl"><table id="exDay"></table></div>
-      <p class="lbl">2 TOP3 고르기</p>
-      <div class="tbl"><table id="exTop"></table></div>
-      <p class="hint" id="exSo"></p>
-      <details><summary>온라인몰 대표님 예시도 보기</summary><div class="tbl"><table id="exTop2"></table></div><p class="hint" id="exSo2"></p></details>
+      <p class="sub">표에 하는 일을 적고 주기와 한 번에 걸리는 시간만 넣으면, 한 달에 쓰는 시간과 먼저 넘길 일 TOP3가 바로 계산돼요.</p>
     </div>
 
     <div class="card">
-      <div class="card-head"><span class="step">1</span><h3>내 하루 적기</h3></div>
-      <p class="hint">아침에 일을 시작해서 끝낼 때까지 한 일을 시간 순서대로요. 시간은 0.5 · 1 · 2시간처럼 크게만 적어요.</p>
-      <div class="items" id="dayRows"></div>
-      <div class="btns"><button class="btn alt small" type="button" data-add="day">줄 더하기</button></div>
-      <p class="lbl" style="margin-top:6px">매주 · 매달 한 번씩 하는 일 (정산 · 보고서 · 광고 점검)</p>
-      <div class="items" id="weekRows"></div>
-      <div class="btns"><button class="btn alt small" type="button" data-add="week">줄 더하기</button></div>
-    </div>
-
-    <div class="card">
-      <div class="card-head"><span class="step">2</span><h3>TOP3 고르기</h3></div>
-      <p class="hint">1에 적은 일을 「하는 일」에 옮겨요. 같은 일은 한 줄로 모아요. 별표는 「TOP3 ★」 칸에서 ★1 · ★2 · ★3을 골라요.</p>
-      <div class="items" id="topRows"></div>
-      <div class="btns"><button class="btn alt small" type="button" data-add="top">줄 더하기</button></div>
-      <div class="sums" id="topSums"></div>
-      <details><summary>칸 읽는 법 · 별표 치는 순서</summary><ul class="guide" id="guide"></ul></details>
-      <div class="btns"><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
+      <div class="seg" id="gPick" role="group" aria-label="표 고르기">
+        <button type="button" data-g="mine" aria-pressed="true">내 표 적기</button>
+        <button type="button" data-g="ceo" aria-pressed="false">예시 · 온라인 판매 대표님</button>
+        <button type="button" data-g="staff" aria-pressed="false">예시 · 회사원</button>
+      </div>
+      <div class="big" id="gBig"></div>
+      <div class="tbl"><table class="grid" id="grid"></table></div>
+      <div class="btns" id="gMine"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button><button class="btn alt small" type="button" data-copy="top3">메모장용으로 복사 (선택)</button><span class="done" data-done="top3" hidden>복사했어요</span></div>
+      <p class="hint" id="gSrc"></p>
+      <details><summary>단계 고르는 법 · TOP3 고르는 순서</summary><ul class="guide" id="lvGuide"></ul></details>
     </div>
   </section>
 
@@ -368,7 +391,7 @@ details[open] summary{margin-bottom:8px}
   /* ---------- 저장 ---------- */
   var KEY="facam-materials-onepage-v1";
   function blank(n,w){var a=[];for(var i=0;i<n;i++){var r=[];for(var j=0;j<w;j++)r.push("");a.push(r);}return a;}
-  var S={day:blank(6,4),week:blank(2,4),top:blank(7,7),card:{},check:{line:"",mark:{},fill:{}},sheet:{}};
+  var S={t3:blank(5,4),card:{},check:{line:"",mark:{},fill:{}},sheet:{}};
   var canSave=true;
   try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var p in o)S[p]=o[p];}localStorage.setItem(KEY+"-t","1");}catch(e){canSave=false;}
   function hhmm(){var d=new Date();return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}
@@ -401,50 +424,70 @@ details[open] summary{margin-bottom:8px}
   function fld(label,input,cls){return '<div class="f'+(cls?' '+cls:'')+'"><span class="lbl">'+label+'</span>'+input+'</div>';}
 
   /* ---------- TOP3 ---------- */
-  var FREQD=["매일","주 1번","주 2번","주 3번","주 4번","주 5번"],FREQW=["매주","매달"];
-  var FREQ=["매일","주 2번","주 3번","주 4번","주 5번","매주","매달"],HRS=["0.5시간","1시간","2시간","2시간 이상"],LV=["1단계","2단계","3단계"],STAR=["★1","★2","★3"];
-  var GUIDE=[
-["내 시간 중 몇 %","일주일 동안 내가 일한 시간을 100으로 놓고 이 일이 얼마를 먹는지 대충 적어요. 5 · 10 단위면 충분해요."],
-["얼마나 자주","매일 · 주 몇 번 · 매주 · 매달"],
-["한 번에 몇 시간","한 번 할 때 붙잡고 있는 시간. 0.5 · 1 · 2시간처럼 적어요."],
-["얼마나 단순한가 1단계","순서표 한 장만 있으면 처음 온 사람도 똑같이 해요. (복사·붙여넣기, 클릭 반복, 정해진 답장)"],
-["얼마나 단순한가 2단계","순서표에 「이럴 땐 이렇게」 기준과 예시가 붙어야 해요. 결과를 사람이 한 번 확인해요. (가이드가 있는 디자인, 보고서 초안)"],
-["얼마나 단순한가 3단계","경험과 감이 있어야 해요. 순서표로 옮기기 어려워요. (핵심 디자인, 영업, 현장을 눈으로 보는 일, 중요한 결정)"],
-["누구에게","1단계는 AI, 2단계는 기준을 만들어 AI나 직원에게 넘기고 사람이 확인, 3단계는 내가 하고 AI는 자료 모으기 같은 준비만 해요. 직원이 없으면 AI와 나 둘로만 나눠도 돼요."],
-["별표 치는 순서","1. 3단계는 빼요. 2. 매일 하고, 하루 30분 이상 붙잡고, 1단계인 일은 %가 작아도 먼저 ★를 줘요(여러 개면 % 큰 순서). 3. 남은 것은 % 큰 순서로 ★를 이어 줘요. 4. %가 같으면 1단계 먼저, 그래도 같으면 더 자주 하는 일 먼저예요."]];
-  var EXDAY=[["9시","밤사이 온 메일 확인 · 답장","1","매일"],["10시","팀 회의","1","매일"],["11시","어제 회의 회의록 정리 · 공유","1","주 4번"],["오후","자료 조사 · 정리","1","주 2번"],["오후","다음 주 미팅 일정 조율","0.5","주 2번"],["오후","제안서 핵심 내용 기획","2","매일"],["퇴근 전","퇴근 전 메일 답장","0.5","매일"],["금요일","주간 보고서 (숫자 모으기 + 정리)","2","매주"]];
-  var EXTOP=[["메일 확인 · 답장",15,"매일","1시간","1단계","AI","★1"],["주간 보고서",15,"매주","2시간","2단계","AI 초안 + 내가 확인","★2"],["회의록 정리 · 공유",10,"주 4번","1시간","1단계","AI","★3"],["자료 조사 · 정리",5,"주 2번","1시간","2단계","AI 초안 + 내가 확인",""],["일정 조율",5,"주 2번","0.5시간","1단계","AI",""],["회의 참석",20,"매일","1시간","3단계","나",""],["제안서 · 기획 핵심",30,"매일","2시간","3단계","나",""]];
-  var EXSO="그래서 이것부터: 3단계(회의 참석, 제안서 · 기획 핵심)는 빼요. ★1 메일 확인 · 답장은 매일, 1시간, 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 주간 보고서(15), ★3 회의록 정리(10)예요. 메일 답장과 회의록은 오늘 바로 AI에게, 보고서는 양식과 기준을 붙여 초안만 AI에게. 돌아온 40을 커리어에 남는 기획 · 제안서에 써요.";
-  var EXTOP2=[["고객 문의 답장 (카톡 · 톡톡 · 게시판, 교환 접수까지)",10,"매일","0.5시간","1단계","AI","★1"],["마케팅 디자인 (배너 · 피드 · 이벤트 이미지)",20,"매주","2시간","2단계","디자이너 직원 + AI (가이드 먼저)","★2"],["상세페이지 · 제품 디자인 (새 제품 오픈)",30,"매달","2시간 이상","3단계","나",""],["인스타 · 릴스 마케팅",15,"매주","2시간","2단계","채용할지 AI와 할지 정하는 중","★3"],["사업 계획 · 성과 숫자 정리",10,"매달","2시간","3단계","나 (AI가 숫자 모으기만)",""],["외부 미팅 (광고사 · 콜라보 작가)",10,"매주","1시간","3단계","나",""],["광고 성과 확인 (광고 운영은 외주)",5,"매주","0.5시간","1단계","AI",""]];
-  var EXSO2="그래서 이것부터: 3단계(상세페이지, 사업 계획, 외부 미팅)는 빼요. ★1 고객 문의 답장은 %가 10으로 크지 않지만 매일, 0.5시간(30분), 1단계라 먼저 별표예요. 남은 자리는 % 큰 순서라 ★2 마케팅 디자인(20), ★3 인스타 · 릴스 마케팅(15)이에요. 마케팅 디자인은 가이드 한 장을 먼저 만들고 넘기고, 인스타 · 릴스는 채용할지 AI와 같이 할지 먼저 정해요. 셋을 합치면 45예요.";
-  var TOPH=["하는 일","내 시간 중 몇 %","얼마나 자주","한 번에 몇 시간","얼마나 단순한가","누구에게","TOP3 ★"];
-  function exTopTable(rows){return '<thead><tr>'+TOPH.map(function(h){return '<th>'+h+'</th>';}).join("")+'</tr></thead><tbody>'+rows.map(function(r){return '<tr><td>'+esc(r[0])+'</td><td class="num">'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td><td>'+esc(r[5])+'</td><td class="star">'+r[6]+'</td></tr>';}).join("")+'</tbody>';}
-  $("exDay").innerHTML='<thead><tr><th>언제</th><th>한 일</th><th>걸린 시간</th><th>얼마나 자주</th></tr></thead><tbody>'+EXDAY.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+esc(r[1])+'</td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td></tr>';}).join("")+'</tbody>';
-  $("exTop").innerHTML=exTopTable(EXTOP);$("exSo").textContent=EXSO;
-  $("exTop2").innerHTML=exTopTable(EXTOP2);$("exSo2").textContent=EXSO2;
-  $("guide").innerHTML=GUIDE.map(function(g){return '<li><b>'+g[0]+'</b>'+esc(g[1])+'</li>';}).join("");
-
-  function renderDayList(kind){
-    var opts=kind==="day"?FREQD:FREQW;
-    $(kind+"Rows").innerHTML=S[kind].map(function(r,i){var p=kind+"."+i+".";
-      return '<div class="item"><div class="g-day">'+fld("언제",txt(r[0],p+0,"언제",i||kind!=="day"?"":"9시"))+fld("한 일",txt(r[1],p+1,"한 일",i||kind!=="day"?"":"출근해서 처음 한 일"),"wide")+fld("걸린 시간",numIn(r[2],p+2,"걸린 시간","0.5","24"))+fld(kind==="day"?"매일 / 주 몇 번":"매주 / 매달",sel(opts,r[3],p+3,"얼마나 자주"))+'</div></div>';}).join("");
-  }
-  function renderTop(){
-    $("topRows").innerHTML=S.top.map(function(r,i){var p="top."+i+".";
-      return '<div class="item'+(/^★/.test(r[6]||"")?" on":"")+'">'+fld("하는 일",txt(r[0],p+0,"하는 일"))+'<div class="g-top">'+fld("몇 % (합계 100)",numIn(r[1],p+1,"내 시간 중 몇 %","5","100"))+fld("얼마나 자주",sel(FREQ,r[2],p+2,"얼마나 자주"))+fld("한 번에 몇 시간",sel(HRS,r[3],p+3,"한 번에 몇 시간"))+fld("얼마나 단순한가",sel(LV,r[4],p+4,"얼마나 단순한가"))+fld("TOP3 ★",sel(STAR,r[6],p+6,"TOP3 별표"))+'</div>'+fld("누구에게 (AI · 직원 · 나)",txt(r[5],p+5,"누구에게"))+'</div>';}).join("");
-    renderSums();
-  }
-  function renderSums(){
-    var t=0,s=0,any=false;S.top.forEach(function(r){var v=parseFloat(r[1]);if(!isNaN(v)){any=true;t+=v;if(/^★/.test(r[6]||""))s+=v;}});
-    var badge=!any||t===0?"":(t===100?'<span class="ok">100 맞아요</span>':'<span class="warn">합계를 100으로 맞춰요</span>');
-    $("topSums").innerHTML='<span>합계 <b>'+(any?t:"-")+'</b></span><span>TOP3 합계 <b>'+(s||"-")+'</b></span>'+badge;
-  }
-  function stars(){var m={};S.top.forEach(function(r){if(/^★/.test(r[6]||"")&&r[0])m[r[6]]=r[0];});return STAR.filter(function(k){return m[k];}).map(function(k){return k+" "+m[k];}).join(" · ");}
-  function onTopInput(el){var a=el.dataset.k.split(".");S[a[0]][+a[1]][+a[2]]=el.value;
-    if(a[0]==="top"&&+a[2]===6&&el.value){var dup=false;S.top.forEach(function(r,i){if(i!==+a[1]&&r[6]===el.value){r[6]="";dup=true;}});save();if(dup){renderTop();return;}}
-    save();if(a[0]==="top"){if(+a[2]===6)el.closest(".item").classList.toggle("on",/^★/.test(el.value));renderSums();}}
-  ["dayRows","weekRows","topRows"].forEach(function(id){var h=function(e){if(e.target.dataset.k)onTopInput(e.target);};$(id).addEventListener("input",h);$(id).addEventListener("change",h);});
-  [].forEach.call(document.querySelectorAll("[data-add]"),function(b){b.addEventListener("click",function(){var k=b.dataset.add;S[k].push(blank(1,k==="top"?7:4)[0]);save();k==="top"?renderTop():renderDayList(k);});});
+  // 한 달 횟수: 일하는 날 22일 · 4.3주 기준
+  var FREQ=[["매일",22],["주 3번",13],["주 2번",8.6],["매주",4.3],["2주에 한 번",2.15],["매달",1]];
+  var LV=["1단계 · 바로 맡김","2단계 · 기준 주고 맡김","3단계 · 내가 함"];
+  var WHO=["AI에게 바로","AI 초안 + 내가 확인","내가 직접"];
+  var LVG=[["1단계 · 바로 맡김","순서표 한 장이면 처음 온 사람도 똑같이 해요. 복사·붙여넣기, 정해진 곳 클릭, 늘 같은 답장, 숫자 옮기기."],
+    ["2단계 · 기준 주고 맡김","「이럴 땐 이렇게」 기준과 예시를 붙이면 초안이 나오고, 사람이 한 번 봐요. 보고서·업무 계획 초안, 조사, 연락 문구, 광고 성과 보기."],
+    ["3단계 · 내가 함","경험과 감, 결정이 필요해요. 신제품 기획, 중요한 미팅·계약, 최종 결정."],
+    ["TOP3 고르는 순서","3단계(내가 할 일)는 빼요 → 한 달에 시간을 많이 먹는 일부터 → 시간이 같으면 단계가 낮은 일부터. 표가 이 순서로 자동으로 골라요."]];
+  function mult(f){for(var i=0;i<FREQ.length;i++)if(FREQ[i][0]===f)return FREQ[i][1];return 0;}
+  function lvNo(v){return v?+String(v).charAt(0):0;}
+  function month(r){var h=parseFloat(r[2]);return isNaN(h)?0:Math.round(mult(r[0])*h*10)/10;}
+  function fmt(n){return (Math.round(n*10)/10).toString();}
+  function ranked(rows){return rows.map(function(r,i){return {r:r,i:i,m:month(r),l:lvNo(r[3])};})
+    .filter(function(x){return x.r[1]&&x.m>0&&(x.l===1||x.l===2);})
+    .sort(function(a,b){return b.m-a.m||a.l-b.l;}).slice(0,3);}
+  var EX={ceo:{rows:[
+      ["매일","고객 문의 답변 (톡톡 · 카톡 · 게시판)","1",LV[0]],
+      ["매일","주문 모아서 발주 넣기","0.5",LV[0]],
+      ["매일","광고 성과 확인","0.5",LV[1]],
+      ["매주","경쟁사 모니터링","1",LV[1]],
+      ["매주","인스타 피드 · 릴스 올리기","1",LV[1]],
+      ["매주","인플루언서 연락 (공구 · 협찬)","1",LV[1]],
+      ["매달","재고 확인 · 입고 신청","1",LV[0]],
+      ["매달","플랫폼 행사 · 프로모션 신청","1",LV[0]],
+      ["매달","신제품 기획","8",LV[2]]],
+     src:"온라인 판매 회사 세 곳의 업무분장표에 공통으로 있는 반복 업무예요."},
+    staff:{rows:[
+      ["매일","메일 확인 · 답장","1",LV[0]],
+      ["매일","회의록 정리 · 공유","0.5",LV[0]],
+      ["매일","엑셀 자료 정리 · 취합","0.5",LV[0]],
+      ["매주","주간 업무 보고서 작성","2",LV[1]],
+      ["매주","미팅 일정 조율","0.5",LV[0]],
+      ["매주","팀 회의","2",LV[2]],
+      ["매달","월간 실적 보고서 작성","4",LV[1]],
+      ["매달","경비 · 법인카드 정산","2",LV[0]],
+      ["매달","다음 달 업무 계획 세우기","3",LV[1]]],
+     src:"회사원이라면 누구나 하는 반복 업무로 만든 예시예요. 시간은 보통 걸리는 만큼 넣었어요."}};
+  $("lvGuide").innerHTML=LVG.map(function(g){return '<li><b>'+g[0]+'</b>'+esc(g[1])+'</li>';}).join("");
+  if(!S.t3)S.t3=blank(6,4);
+  var G=S.t3.some(function(r){return r[1];})?"mine":"ceo";   // 처음 온 사람은 예시부터, 적어 둔 게 있으면 내 표
+  function rowsOf(){return G==="mine"?S.t3:EX[G].rows;}
+  function bigHtml(rows){var tot=rows.reduce(function(s,r){return s+month(r);},0),t=ranked(rows),sum=t.reduce(function(s,x){return s+x.m;},0);
+    return '<div class="bn"><span>반복 업무에 버리는 시간 (한 달)</span><b>'+fmt(tot)+'<small>시간</small></b></div>'
+      +'<div class="bn hl"><span>TOP3만 넘겨도 돌아오는 시간</span><b>'+fmt(sum)+'<small>시간</small></b></div>'
+      +'<ol class="tops">'+(t.length?t.map(function(x,k){return '<li><span class="badge">TOP'+(k+1)+'</span><b>'+esc(x.r[1])+'</b><span class="m">한 달 '+fmt(x.m)+'시간 · '+WHO[x.l-1]+'</span></li>';}).join(""):'<li class="empty">표를 채우면 여기에 TOP3가 떠요</li>')+'</ol>';}
+  function renderGrid(){var rows=rowsOf(),ro=G!=="mine",top=ranked(rows),pos={};top.forEach(function(x,k){pos[x.i]=k+1;});
+    $("grid").innerHTML='<thead><tr><th>주기</th><th>하는 일</th><th>한 번에<br>(시간)</th><th>단계</th><th>한 달</th><th>순위</th></tr></thead><tbody>'+rows.map(function(r,i){var p="t3."+i+".",m=month(r);
+      return '<tr'+(pos[i]?' class="hit"':'')+'>'
+        +'<td>'+(ro?esc(r[0]):sel(FREQ.map(function(f){return f[0];}),r[0],p+0,"주기"))+'</td>'
+        +'<td>'+(ro?esc(r[1]):txt(r[1],p+1,"하는 일",i?"":"예: 고객 문의 답변"))+'</td>'
+        +'<td class="num">'+(ro?(r[2]?esc(r[2]):'<span class="q">확인 중</span>'):numIn(r[2],p+2,"한 번에 몇 시간","0.5","200"))+'</td>'
+        +'<td>'+(ro?lvNo(r[3])+'단계':sel(LV,r[3],p+3,"단계"))+'</td>'
+        +'<td class="num out" id="gm'+i+'">'+(m?fmt(m)+'시간':'')+'</td>'
+        +'<td class="star" id="gr'+i+'">'+(pos[i]?'TOP'+pos[i]:'')+'</td></tr>';}).join("")+'</tbody>';
+    $("gBig").innerHTML=bigHtml(rows);$("gMine").hidden=ro;$("gSrc").textContent=ro?EX[G].src:"한 달은 일하는 날 22일 · 4.3주로 계산해요. 30분은 0.5로 적어요.";
+    [].forEach.call(document.querySelectorAll("#gPick button"),function(b){b.setAttribute("aria-pressed",b.dataset.g===G);});}
+  function refresh(){var rows=S.t3,top=ranked(rows),pos={};top.forEach(function(x,k){pos[x.i]=k+1;});
+    rows.forEach(function(r,i){var m=month(r);$("gm"+i).textContent=m?fmt(m)+'시간':'';$("gr"+i).textContent=pos[i]?'TOP'+pos[i]:'';$("gm"+i).parentNode.classList.toggle("hit",!!pos[i]);});
+    $("gBig").innerHTML=bigHtml(rows);}
+  [].forEach.call(document.querySelectorAll("#gPick button"),function(b){b.addEventListener("click",function(){G=b.dataset.g;renderGrid();});});
+  function onG(e){var k=e.target.dataset.k;if(!k||G!=="mine")return;var a=k.split(".");S.t3[+a[1]][+a[2]]=e.target.value;save();refresh();}
+  $("grid").addEventListener("input",onG);$("grid").addEventListener("change",onG);
+  $("gAdd").addEventListener("click",function(){S.t3.push(blank(1,4)[0]);save();renderGrid();});
+  function stars(){return ranked(S.t3).map(function(x,k){return "TOP"+(k+1)+" "+x.r[1];}).join(" · ");}
 
   /* ---------- 한 줄 카드 ---------- */
   var STOPS=[
@@ -506,7 +549,7 @@ details[open] summary{margin-bottom:8px}
   function copyText(kind){
     if(kind==="check")return checkDoc();
     if(kind==="card")return "[한 줄 카드]\n맡기다 접은 일: "+(S.card.job||"")+"\n그때 무슨 일: "+(S.card.what||"")+"\n어디서 멈췄나: "+(S.card.stop||"")+"\n다음엔: "+(S.card.next||"")+"\n"+cardLine();
-    if(kind==="top3"){var L=["[내 업무 자동화 우선순위 TOP3 표]","TOP3: "+(stars()||"아직 없음"),""];S.top.forEach(function(r){if(r[0])L.push(r[0]+" | "+(r[1]||"")+"% | "+(r[2]||"")+" | "+(r[3]||"")+" | "+(r[4]||"")+" | "+(r[5]||"")+" | "+(r[6]||""));});return L.join("\n");}
+    if(kind==="top3"){var L=["[내 업무 자동화 우선순위 TOP3 표]","TOP3: "+(stars()||"아직 없음"),""];S.t3.forEach(function(r){if(r[1])L.push((r[0]||"")+" | "+r[1]+" | 한 번에 "+(r[2]||"")+"시간 | "+(r[3]||"")+" | 한 달 "+fmt(month(r))+"시간");});return L.join("\n");}
     renderSheet();
     return "[파트 1 진단 한 장]\nAI 업무 시스템 진단: "+(S.sheet.diag||"")+"\n우선순위 TOP3: "+stars()+"\n지시 점검표: "+checkSummary()+"\n한 줄 카드: "+cardSummary()+"\n한눈에 보이는 빈 곳: "+(S.sheet.gap||"");
   }
@@ -521,7 +564,7 @@ details[open] summary{margin-bottom:8px}
   $("howto").addEventListener("toggle",function(){try{localStorage.setItem(KEY+"-howto",$("howto").open?"open":"closed");}catch(e){}});
 
   /* ---------- 처음 그리기 ---------- */
-  renderDayList("day");renderDayList("week");renderTop();renderStops();renderCard();renderMarks();renderFill();renderScore();
+  renderGrid();renderStops();renderCard();renderMarks();renderFill();renderScore();
   openTab((location.hash||"").slice(1));
 })();
 </script>
