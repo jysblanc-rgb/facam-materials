@@ -125,6 +125,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .grid td.num{text-align:center}
 .grid td:nth-child(5),.grid td:nth-child(6){white-space:nowrap}
 .grid input[type=number]{text-align:center}
+.grid col.c-d{width:8%}
+.del{font:inherit;font-size:13px;font-weight:700;color:var(--sub);background:transparent;border:1px solid var(--line-strong);border-radius:8px;padding:5px 8px;min-height:32px;cursor:pointer}
 .grid select,.grid input{font-size:14px;padding:6px 6px;min-height:36px}
 .grid td.out{font-weight:800;color:var(--accent-ink)}
 .grid .q{font-size:13px;color:var(--miss);font-weight:700}
@@ -136,8 +138,8 @@ tr.hit td{background:var(--accent-soft)}
   .grid tbody tr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 8px;padding:10px 4px;border-bottom:1px solid var(--line)}
   .grid tbody td{border:0;padding:0;width:auto!important;display:flex;flex-direction:column;justify-content:center}
   .grid tbody td:nth-child(2){grid-column:1/4;order:-1;font-weight:700}
-  .grid tbody td:nth-child(1)::before{content:"주기"}.grid tbody td:nth-child(3)::before{content:"한 번에(시간)"}.grid tbody td:nth-child(4)::before{content:"단계"}
-  .grid tbody td:nth-child(5)::before{content:"한 달"}.grid tbody td:nth-child(6)::before{content:"순위"}
+  .grid tbody td:nth-child(1)::before{content:"주기"}.grid tbody td:nth-child(3)::before{content:"소요시간(시간)"}.grid tbody td:nth-child(4)::before{content:"단계"}
+  .grid tbody td:nth-child(5)::before{content:"총 소요시간(월)"}.grid tbody td:nth-child(6)::before{content:"순위"}
   .grid tbody td::before{font-size:12px;color:var(--sub);font-weight:700;margin-bottom:2px}
   .grid tbody td,.grid tbody td.num{text-align:left}
   .grid colgroup{display:none}
@@ -244,7 +246,7 @@ details[open] summary{margin-bottom:8px}
   <section class="panel" role="tabpanel" id="top3" aria-labelledby="t-top3" hidden>
     <div class="panel-head">
       <h2>내 업무 자동화 우선순위 TOP3 표</h2>
-      <p class="sub">표에 하는 일을 적고 주기와 한 번에 걸리는 시간만 넣으면, 한 달에 쓰는 시간과 먼저 넘길 일 TOP3가 바로 계산돼요.</p>
+      <p class="sub">반복하는 일을 주기 · 하는 일 · 소요시간 · 단계로 적으면, 한 달에 버려지는 시간과 먼저 넘길 일 TOP3가 바로 계산돼요.</p>
     </div>
 
     <div class="card">
@@ -256,7 +258,7 @@ details[open] summary{margin-bottom:8px}
     </div>
 
     <div class="card">
-      <div class="card-head"><span class="step">2</span><h3>예시 · 회사원</h3></div>
+      <div class="card-head"><span class="step">2</span><h3>예시 · 직장인</h3></div>
       <div class="tbl"><table class="grid" id="gridStaff"></table></div>
       <p class="lbl">결과</p>
       <div class="big" id="bigStaff"></div>
@@ -264,7 +266,7 @@ details[open] summary{margin-bottom:8px}
 
     <div class="card">
       <div class="card-head"><span class="step">3</span><h3>내 표 적기</h3></div>
-      <p class="hint">주기를 고르고, 하는 일을 적고, 한 번에 몇 시간인지 숫자로 넣고(30분 = 0.5), 단계를 골라요. 한 달은 일하는 날 22일 · 4.3주로 계산해요.</p>
+      <p class="hint">주기를 고르고, 하는 일을 적고, 소요시간을 숫자로 넣고(0.5 = 30분, 1 = 1시간), 단계를 골라요. 총 소요시간(월)은 일하는 날 22일 · 4.3주로 계산해요.</p>
       <div class="tbl"><table class="grid" id="grid"></table></div>
       <div class="btns"><button class="btn alt small" type="button" id="gAdd">줄 더하기</button></div>
       <p class="lbl">결과</p>
@@ -445,10 +447,10 @@ details[open] summary{margin-bottom:8px}
   var FREQ=[["매일",22],["주 3번",13],["주 2번",8.6],["매주",4.3],["2주에 한 번",2.15],["매달",1]];
   var LV=["1단계 · 바로 맡김","2단계 · 기준 주고 맡김","3단계 · 내가 함"];
   var WHO=["AI에게 바로","AI 초안 + 내가 확인","내가 직접"];
-  var LVG=[["1단계 · 바로 맡김","순서표 한 장이면 처음 온 사람도 똑같이 해요. 복사·붙여넣기, 정해진 곳 클릭, 늘 같은 답장, 숫자 옮기기."],
-    ["2단계 · 기준 주고 맡김","「이럴 땐 이렇게」 기준과 예시를 붙이면 초안이 나오고, 사람이 한 번 봐요. 보고서·업무 계획 초안, 조사, 연락 문구, 광고 성과 보기."],
-    ["3단계 · 내가 함","경험과 감, 결정이 필요해요. 신제품 기획, 중요한 미팅·계약, 최종 결정."],
-    ["TOP3 고르는 순서","3단계(내가 할 일)는 빼요 → 한 달에 시간을 많이 먹는 일부터 → 시간이 같으면 단계가 낮은 일부터. 표가 이 순서로 자동으로 골라요."]];
+  var LVG=[["1단계 · 바로 맡김","매뉴얼 하나만 있으면 누구라도 바로 할 수 있는 단순한 업무예요. 복사·붙여넣기, 정해진 곳 클릭, 늘 같은 답장, 숫자 옮기기."],
+    ["2단계 · 기준 주고 맡김","매뉴얼 뼈대는 있지만 매뉴얼만으로는 어렵고, 경험이나 교육으로 쌓인 노하우가 같이 들어가야 하는 업무예요. 보고서·업무 계획, 조사, 연락 문구, 광고 성과 보기."],
+    ["3단계 · 내가 함","중요한 의사결정이나 문제 해결이 필요하고, 프로세스가 복잡한 업무예요. 신제품 기획, 중요한 미팅·계약, 최종 결정."],
+    ["TOP3 고르는 순서","3단계는 빼요 → 총 소요시간(월)이 큰 일부터 → 시간이 같으면 단계가 낮은 일(1단계)부터. 표가 이 순서로 자동으로 골라요."]];
   function mult(f){for(var i=0;i<FREQ.length;i++)if(FREQ[i][0]===f)return FREQ[i][1];return 0;}
   function lvNo(v){return v?+String(v).charAt(0):0;}
   function month(r){var h=parseFloat(r[2]);return isNaN(h)?0:Math.round(mult(r[0])*h*10)/10;}
@@ -484,14 +486,14 @@ details[open] summary{margin-bottom:8px}
       +'<ol class="tops">'+(t.length?t.map(function(x,k){return '<li><span class="badge">TOP'+(k+1)+'</span><b>'+esc(x.r[1])+'</b><span class="m">한 달 '+fmt(x.m)+'시간 · '+WHO[x.l-1]+'</span></li>';}).join(""):'<li class="empty">표를 채우면 여기에 TOP3가 떠요</li>')+'</ol>';}
   // 예시 두 개는 읽기 전용 표로 위에, 내 표는 맨 아래 (시연이 위에서 아래로만 내려가게)
   function renderGrid(gid,bid,rows,ro){var top=ranked(rows),pos={},pf=ro?gid:"g";top.forEach(function(x,k){pos[x.i]=k+1;});
-    $(gid).innerHTML='<colgroup><col class="c-f"><col><col class="c-h"><col class="c-l"><col class="c-m"><col class="c-r"></colgroup>'+'<thead><tr><th>주기</th><th>하는 일</th><th>한 번에<br>(시간)</th><th>단계</th><th>한 달</th><th>순위</th></tr></thead><tbody>'+rows.map(function(r,i){var p="t3."+i+".",m=month(r);
+    $(gid).innerHTML='<colgroup><col class="c-f"><col><col class="c-h"><col class="c-l"><col class="c-m"><col class="c-r">'+(ro?'':'<col class="c-d">')+'</colgroup>'+'<thead><tr><th>주기</th><th>하는 일</th><th>소요시간<br>(시간)</th><th>단계</th><th>총 소요시간<br>(월)</th><th>순위</th>'+(ro?'':'<th>삭제</th>')+'</tr></thead><tbody>'+rows.map(function(r,i){var p="t3."+i+".",m=month(r);
       return '<tr'+(pos[i]?' class="hit"':'')+'>'
         +'<td>'+(ro?esc(r[0]):sel(FREQ.map(function(f){return f[0];}),r[0],p+0,"주기"))+'</td>'
         +'<td>'+(ro?esc(r[1]):txt(r[1],p+1,"하는 일",i?"":"예: 고객 문의 답변"))+'</td>'
-        +'<td class="num">'+(ro?(r[2]?esc(r[2]):'<span class="q">확인 중</span>'):numIn(r[2],p+2,"한 번에 몇 시간","0.5","200"))+'</td>'
+        +'<td class="num">'+(ro?(r[2]?esc(r[2]):'<span class="q">확인 중</span>'):numIn(r[2],p+2,"소요시간","0.5","200"))+'</td>'
         +'<td>'+(ro?lvNo(r[3])+'단계':sel(LV,r[3],p+3,"단계"))+'</td>'
         +'<td class="num out" id="'+pf+'m'+i+'">'+(m?fmt(m)+'시간':'')+'</td>'
-        +'<td class="star" id="'+pf+'r'+i+'">'+(pos[i]?'TOP'+pos[i]:'')+'</td></tr>';}).join("")+'</tbody>';
+        +'<td class="star" id="'+pf+'r'+i+'">'+(pos[i]?'TOP'+pos[i]:'')+'</td>'+(ro?'':'<td><button type="button" class="del" data-del="'+i+'" aria-label="'+(i+1)+'번째 줄 삭제">삭제</button></td>')+'</tr>';}).join("")+'</tbody>';
     $(bid).innerHTML=bigHtml(rows);}
   function refresh(){var rows=S.t3,top=ranked(rows),pos={};top.forEach(function(x,k){pos[x.i]=k+1;});
     rows.forEach(function(r,i){var m=month(r);$("gm"+i).textContent=m?fmt(m)+'시간':'';$("gr"+i).textContent=pos[i]?'TOP'+pos[i]:'';$("gm"+i).parentNode.classList.toggle("hit",!!pos[i]);});
@@ -501,6 +503,7 @@ details[open] summary{margin-bottom:8px}
   function onG(e){var k=e.target.dataset.k;if(!k)return;var a=k.split(".");S.t3[+a[1]][+a[2]]=e.target.value;save();refresh();}
   $("grid").addEventListener("input",onG);$("grid").addEventListener("change",onG);
   $("gAdd").addEventListener("click",function(){S.t3.push(blank(1,4)[0]);save();renderMine();});
+  $("grid").addEventListener("click",function(e){var b=e.target.closest("[data-del]");if(!b)return;S.t3.splice(+b.dataset.del,1);if(!S.t3.length)S.t3=blank(1,4);save();renderMine();});
   function stars(){return ranked(S.t3).map(function(x,k){return "TOP"+(k+1)+" "+x.r[1];}).join(" · ");}
 
   /* ---------- 한 줄 카드 ---------- */
@@ -563,7 +566,7 @@ details[open] summary{margin-bottom:8px}
   function copyText(kind){
     if(kind==="check")return checkDoc();
     if(kind==="card")return "[한 줄 카드]\n맡기다 접은 일: "+(S.card.job||"")+"\n그때 무슨 일: "+(S.card.what||"")+"\n어디서 멈췄나: "+(S.card.stop||"")+"\n다음엔: "+(S.card.next||"")+"\n"+cardLine();
-    if(kind==="top3"){var L=["[내 업무 자동화 우선순위 TOP3 표]","TOP3: "+(stars()||"아직 없음"),""];S.t3.forEach(function(r){if(r[1])L.push((r[0]||"")+" | "+r[1]+" | 한 번에 "+(r[2]||"")+"시간 | "+(r[3]||"")+" | 한 달 "+fmt(month(r))+"시간");});return L.join("\n");}
+    if(kind==="top3"){var L=["[내 업무 자동화 우선순위 TOP3 표]","TOP3: "+(stars()||"아직 없음"),""];S.t3.forEach(function(r){if(r[1])L.push((r[0]||"")+" | "+r[1]+" | 소요시간 "+(r[2]||"")+"시간 | "+(r[3]||"")+" | 총 소요시간(월) "+fmt(month(r))+"시간");});return L.join("\n");}
     renderSheet();
     return "[파트 1 진단 한 장]\nAI 업무 시스템 진단: "+(S.sheet.diag||"")+"\n우선순위 TOP3: "+stars()+"\n지시 점검표: "+checkSummary()+"\n한 줄 카드: "+cardSummary()+"\n한눈에 보이는 빈 곳: "+(S.sheet.gap||"");
   }
