@@ -217,6 +217,7 @@ details[open] summary{margin-bottom:8px}
       <button role="tab" id="t-check" aria-controls="check"><span class="no">01-03-02</span>지시 점검표</button>
       <button role="tab" id="t-sheet" aria-controls="sheet"><span class="no">01-03-02</span>파트 1 진단 한 장</button>
       <button role="tab" id="t-jd" aria-controls="jd"><span class="no">03-01-02</span>총괄 비서 직무기술서</button>
+      <button role="tab" id="t-intro" aria-controls="intro"><span class="no">03-02-01</span>회사 소개서 인터뷰 프롬프트</button>
     </nav>
     <p class="saved" id="saved" aria-live="polite">적는 대로 자동 저장돼요</p>
   </div>
@@ -262,6 +263,18 @@ details[open] summary{margin-bottom:8px}
 ## 하지 말 것
 - 가격·발주·환불처럼 돈이 걸린 결정은 네가 정하지 말고 나한테 물어봐. 그건 내가 정해. 단가표에 이미 있는 값은 그대로 써도 돼.</pre>
       <div class="btns"><button class="btn alt small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('jd_ex').innerText);this.textContent='복사했어요'">풀결 예시 복사</button></div>
+    </div>
+  </section>
+
+  <!-- ============ 03-02-01 회사 소개서 인터뷰 프롬프트 ============ -->
+  <section class="panel" role="tabpanel" id="intro" aria-labelledby="t-intro" hidden>
+    <div class="panel-head"><h2>회사 소개서 인터뷰 프롬프트</h2><p class="sub">그대로 복사해서 새 대화에 보내세요. 비서가 아홉 칸을 묻고, 답하면 회사 소개서 한 장으로 정리해 줘요.</p></div>
+    <div class="card">
+      <pre id="intro_t" style="white-space:pre-wrap;margin:0;font:inherit">우리 회사 소개서를 같이 만들자. 아래 아홉 칸을 번호 붙인 질문으로 한 번에 보내 줘. 내 클로드 지침에 이미 쓴 짧은 회사 소개는 다시 묻지 마.
+1 상품 상세: 대표 상품마다 무엇이고 어떤 점이 다른가? 2 가격: 상품별 가격은? 3 판매처: 어디서 파나? 4 고객: 주로 누가 사나? 5 강점: 고객이 우리를 고르는 이유는?
+6 약한 곳: 아직 부족한 점은? 7 사람: 누가 어떤 일을 맡나? 8 거래처: 주요 거래처와 거래 조건은? 9 목표: 올해 목표는?
+내가 답하면 칸마다 제목(##)을 달고 짧은 줄로 「(회사 이름) 회사 소개서」 한 장으로 정리해 줘. 내가 안 한 말은 넣지 마. 정리가 끝나면 이 프로젝트 파일로 저장해 줘.</pre>
+      <div class="btns"><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('intro_t').innerText);this.textContent='복사했어요'">그대로 복사</button></div>
     </div>
   </section>
 
