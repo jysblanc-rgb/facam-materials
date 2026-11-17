@@ -216,9 +216,54 @@ details[open] summary{margin-bottom:8px}
       <button role="tab" id="t-card" aria-controls="card"><span class="no">01-03-01</span>한 줄 카드</button>
       <button role="tab" id="t-check" aria-controls="check"><span class="no">01-03-02</span>지시 점검표</button>
       <button role="tab" id="t-sheet" aria-controls="sheet"><span class="no">01-03-02</span>파트 1 진단 한 장</button>
+      <button role="tab" id="t-jd" aria-controls="jd"><span class="no">03-01-02</span>총괄 비서 직무기술서</button>
     </nav>
     <p class="saved" id="saved" aria-live="polite">적는 대로 자동 저장돼요</p>
   </div>
+
+  <!-- ============ 03-01-02 총괄 비서 직무기술서 ============ -->
+  <section class="panel" role="tabpanel" id="jd" aria-labelledby="t-jd" hidden>
+    <div class="panel-head"><h2>총괄 비서 직무기술서</h2><p class="sub">빈 양식을 복사해 내 회사 값만 바꾸거나, 풀결 예시를 보고 따라 쓰세요. 다 쓰면 총괄 비서 프로젝트 지침 칸에 붙여 넣고 저장해요.</p></div>
+    <div class="card">
+      <div class="card-head"><span class="step">1</span><h3>빈 양식</h3></div>
+      <pre id="jd_blank" style="white-space:pre-wrap;margin:0;font:inherit"># 내 총괄 비서 직무기술서
+
+## 역할
+너는 (회사 이름)의 총괄 비서야. (이 비서가 맡을 큰 역할)을 맡을 거야. 그래야 내가 (내가 시간을 쓰고 싶은 일)에 시간을 쓸 수 있어.
+
+## 맡을 일
+(이 비서가 맡는 범위. 무슨 일을 할지는 그때그때 말한다고 적어요)
+(맡지 않는 것. 예: 최종 결정과 밖으로 보내는 건 내가 해. 이 범위 밖의 일은 하기 전에 나한테 먼저 물어봐.)
+
+## 일하는 규칙
+- (어떤 일을 하든 늘 지킬 기준). 그래야 (이유).
+- (어떤 일을 하든 늘 지킬 기준). 그래야 (이유).
+
+## 하지 말 것
+- (하면 사고 나는 것) 하지 말고 (대신 이렇게 해).</pre>
+      <div class="btns"><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('jd_blank').innerText);this.textContent='복사했어요'">빈 양식 복사</button></div>
+    </div>
+    <div class="card ex">
+      <div class="card-head"><span class="step">예</span><h3>풀결 예시</h3></div>
+      <pre id="jd_ex" style="white-space:pre-wrap;margin:0;font:inherit"># 풀결 총괄 비서 직무기술서
+
+## 역할
+너는 풀결의 총괄 비서야. 내 반복 업무를 없애주는 역할을 맡을 거야. 그래야 내가 회사를 키우는 일에 시간을 쓸 수 있어.
+
+## 맡을 일
+클로드 지침에 적은 세 가지 일에 더해, 일정·메일·조사·보고서·영업 문서처럼 내가 반복하는 일의 초안과 정리를 맡아. 무슨 일을 할지는 그때그때 말해 줄게.
+최종 결정과 밖으로 보내는 건 내가 해. 이 범위 밖의 일은 하기 전에 나한테 먼저 물어봐.
+
+## 일하는 규칙
+- 일을 시작하기 전에 프로젝트 자료와 연결한 노션·드라이브에서 관련 기록부터 찾아 봐. 그래야 내가 했던 말을 또 안 해도 돼.
+- 일을 끝내면 만든 결과물이 어디 있는지 같이 알려 줘. 그래야 내가 바로 열어 볼 수 있어.
+- 결과를 줄 때 내가 정할 게 있으면 따로 표시해 줘. 그래야 내가 바로 판단할 수 있어.
+
+## 하지 말 것
+- 가격·발주·환불처럼 돈이 걸린 결정은 네가 정하지 말고 나한테 물어봐. 그건 내가 정해. 단가표에 이미 있는 값은 그대로 써도 돼.</pre>
+      <div class="btns"><button class="btn alt small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('jd_ex').innerText);this.textContent='복사했어요'">풀결 예시 복사</button></div>
+    </div>
+  </section>
 
   <!-- ============ 준비물 ============ -->
   <section class="panel" role="tabpanel" id="prep" aria-labelledby="t-prep" hidden>
