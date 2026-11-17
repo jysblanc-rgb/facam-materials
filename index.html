@@ -218,6 +218,8 @@ details[open] summary{margin-bottom:8px}
       <button role="tab" id="t-sheet" aria-controls="sheet"><span class="no">01-03-02</span>파트 1 진단 한 장</button>
       <button role="tab" id="t-jd" aria-controls="jd"><span class="no">03-01-02</span>총괄 비서 직무기술서</button>
       <button role="tab" id="t-intro" aria-controls="intro"><span class="no">03-02-01</span>회사 소개서 인터뷰 프롬프트</button>
+      <button role="tab" id="t-msample" aria-controls="msample"><span class="no">03-03-01</span>아침 메일 브리핑 완성 샘플</button>
+      <button role="tab" id="t-morder" aria-controls="morder"><span class="no">03-03-01</span>아침 메일 브리핑 업무 지시서</button>
     </nav>
     <p class="saved" id="saved" aria-live="polite">적는 대로 자동 저장돼요</p>
   </div>
@@ -275,6 +277,99 @@ details[open] summary{margin-bottom:8px}
 6 약한 곳: 아직 부족한 점은? 7 사람: 누가 어떤 일을 맡나? 8 거래처: 주요 거래처와 거래 조건은? 9 목표: 올해 목표는?
 내가 답하면 칸마다 제목(##)을 달고 짧은 줄로 「(회사 이름) 회사 소개서」 한 장으로 정리해 줘. 내가 안 한 말은 넣지 마. 정리가 끝나면 이 프로젝트 파일로 저장해 줘.</pre>
       <div class="btns"><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('intro_t').innerText);this.textContent='복사했어요'">그대로 복사</button></div>
+    </div>
+  </section>
+
+  <!-- ============ 03-03-01 아침 메일 브리핑 완성 샘플 ============ -->
+  <section class="panel" role="tabpanel" id="msample" aria-labelledby="t-msample" hidden>
+    <div class="panel-head"><h2>아침 메일 브리핑 완성 샘플</h2><p class="sub">그대로 복사해서 내 업무 지시서 참고 자료에 넣으세요. 결과물 모양이 이 샘플에 맞춰져요.</p></div>
+    <div class="card">
+      <pre id="msample_t" style="white-space:pre-wrap;margin:0;font:inherit">📧 아침 메일 브리핑
+11/12(목) 09:00 기준
+
+📌 결론
+━━━━━━
+1순위: 결앤숲 첫 주문 물량 답장
+→ 오늘 오전 11시 전에 초안만 확인해 주세요
+
+🙋 오늘 답할 것
+━━━━━━
+▪️ 결앤숲 MD님
+첫 주문 물량 확인 요청 · 어제 16:40
+- 요지
+  · 11월 마지막 주 오픈 첫 주문 물량을 물어요
+  · 오늘 오전 11시까지 답을 받고 싶대요
+- 초안 : 품목별 물량 정리해 11시 전에 보내 드리겠다고
+- 할 일 : 품목별 물량 정해 답장 (~11/12 11:00)
+
+▪️ 온새미랩 담당자님
+어성초 토너 발주 확인 · 어제 19:10
+- 요지
+  · 재고가 5일 치 남았대요
+  · 이번 발주 수량을 물어요
+- 초안 : 이번 주 판매량 보고 금요일까지 수량 알려 드리겠다고
+- 할 일 : 발주 수량 정해 승인 (~11/14 금)
+
+💰 돈과 기회
+━━━━━━
+▪️ 청림코스메틱 담당자님
+비밀유지계약서 서명 일정 · 어제 11:20
+- 요지
+  · 서명 가능한 날을 알려 달래요
+- 초안 : 일정 확인해 이번 주 안에 알려 드리겠다고
+- 할 일 : 서명일 정해 회신 (~11/14 금)</pre>
+      <div class="btns"><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('msample_t').innerText);this.textContent='복사했어요'">그대로 복사</button></div>
+    </div>
+  </section>
+
+  <!-- ============ 03-03-01 아침 메일 브리핑 업무 지시서 ============ -->
+  <section class="panel" role="tabpanel" id="morder" aria-labelledby="t-morder" hidden>
+    <div class="panel-head"><h2>아침 메일 브리핑 업무 지시서</h2><p class="sub">다섯 가지를 채운 완성본이에요. 복사해서 내 메일함 값만 바꿔 비서에게 보내세요.</p></div>
+    <div class="card">
+      <pre id="morder_t" style="white-space:pre-wrap;margin:0;font:inherit">① 진행 배경: 매일 아침 최근 온 메일(지난 24시간)을 하나씩 열어 보느라 시간이 가
+② 성공적인 결과: 맨 위에 결론 한두 줄, 그 아래 오늘 답할 것 · 돈과 기회 · 알고만 있으면 되는 것 세 칸으로 나눈 한 장
+③ 업무 프로세스: 메일 본문까지 읽고, 광고는 빼고, 내가 움직이거나 알아야 할 것만 세 칸에 나눠 올려
+④ 참고 자료: 프로젝트에 올린 회사 소개서와 완성 샘플 한 장
+⑤ 데드라인: 오늘은 지금 바로 한 장(매일 오게 하는 건 다음에)
+
+[완성 샘플]
+📧 아침 메일 브리핑
+11/12(목) 09:00 기준
+
+📌 결론
+━━━━━━
+1순위: 결앤숲 첫 주문 물량 답장
+→ 오늘 오전 11시 전에 초안만 확인해 주세요
+
+🙋 오늘 답할 것
+━━━━━━
+▪️ 결앤숲 MD님
+첫 주문 물량 확인 요청 · 어제 16:40
+- 요지
+  · 11월 마지막 주 오픈 첫 주문 물량을 물어요
+  · 오늘 오전 11시까지 답을 받고 싶대요
+- 초안 : 품목별 물량 정리해 11시 전에 보내 드리겠다고
+- 할 일 : 품목별 물량 정해 답장 (~11/12 11:00)
+
+▪️ 온새미랩 담당자님
+어성초 토너 발주 확인 · 어제 19:10
+- 요지
+  · 재고가 5일 치 남았대요
+  · 이번 발주 수량을 물어요
+- 초안 : 이번 주 판매량 보고 금요일까지 수량 알려 드리겠다고
+- 할 일 : 발주 수량 정해 승인 (~11/14 금)
+
+💰 돈과 기회
+━━━━━━
+▪️ 청림코스메틱 담당자님
+비밀유지계약서 서명 일정 · 어제 11:20
+- 요지
+  · 서명 가능한 날을 알려 달래요
+- 초안 : 일정 확인해 이번 주 안에 알려 드리겠다고
+- 할 일 : 서명일 정해 회신 (~11/14 금)
+
+이해 안 가는 건 질문해.</pre>
+      <div class="btns"><button class="btn small" type="button" onclick="navigator.clipboard.writeText(document.getElementById('morder_t').innerText);this.textContent='복사했어요'">그대로 복사</button></div>
     </div>
   </section>
 
